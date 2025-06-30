@@ -1,5 +1,5 @@
 <?php
-    include("Database.php");
+    include("db.php");
 
     // SQL database
     $sql = "INSERT INTO movies (title, description, genre, duration, rating, release_date, poster_url, status, price)
@@ -25,8 +25,8 @@
 
     <body>
         <?php
-            $avail_movies = array("M1", "M2", "M3", "M4", "M5");
-            $premiered_movies = array("M1", "M2");
+            //$avail_movies = array("M1", "M2", "M3", "M4", "M5");
+            //$premiered_movies = array("M1", "M2");
 
             function add_movie($movie){  // Adding of movies on the list
                 global $avail_movies;
@@ -83,7 +83,6 @@
             add_movie("M1");
 
             update_movie("M8", "M9");
-
 
 
             mysqli_close($conn);
