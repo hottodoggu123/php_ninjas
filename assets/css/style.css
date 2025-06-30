@@ -3,11 +3,11 @@ body {
   padding: 0;
   font-family: "Segoe UI", sans-serif;
   background-color: #f8f8f8;
-  color: #333;
+  color: #303030;
 }
 
 header {
-  background-color: #0b1f40;
+  background-color: #303030;
   padding: 20px;
   color: #fff;
   text-align: center;
@@ -27,7 +27,7 @@ h1{
 }
 
 h2 {
-  color: #0b1f40;
+  color: #303030;
 }
 
 .movie-list {
@@ -54,8 +54,9 @@ h2 {
 
 .movie-card img {
   width: 100%;
-  height: 320px;
+  height: 330px;
   object-fit: cover;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .movie-card h3 {
@@ -66,7 +67,7 @@ h2 {
 
 .button {
   display: inline-block;
-  background-color: #0b1f40;
+  background-color: #303030;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -77,42 +78,64 @@ h2 {
 }
 
 .button:hover {
-  background-color: #092033;
-}
-
-.seats {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 10px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.seat {
-  width: 35px;
-  height: 35px;
-  background-color: #ccc;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-  line-height: 35px;
-}
-
-.seat.selected {
-  background-color: #0b1f40;
-  color: #fff;
-}
-
-.seat.occupied {
-  background-color: #555;
-  cursor: not-allowed;
+  background-color: #303030;
 }
 
 footer {
   text-align: center;
   padding: 20px;
-  background-color: #0b1f40;
+  background-color: #303030;
   color: white;
   margin-top: 40px;
   font-size: 14px;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: underline;
+  margin: 0 5px;
+}
+
+footer a:hover {
+  text-decoration: none;
+}
+
+nav {
+  margin-top: 15px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px 20px;
+}
+
+.site-name {
+  font-size: 1.5em;
+  color: #fff;
+  font-weight: bold;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-menu li a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  background-color: #505050;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.nav-menu li a:hover {
+  background-color: #707070;
 }
