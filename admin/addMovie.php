@@ -1,5 +1,5 @@
 <?php
-     function add_movie($addedMovie){  // Adding of movies on the list
+     function add_movie($addedMovie){   // Adding movies on the list
                 global $pdo;
 
                 // SQL Check if movie already exist on the database
@@ -27,6 +27,7 @@
                                 NOW()
                         )";
                     
+                    // Error Checking
                     try{
                         $stmt = $pdo->prepare($sql);
                         $stmt->execute(['title' => $addedMovie]);
