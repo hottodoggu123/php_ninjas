@@ -50,7 +50,28 @@
                 }
             }
 
-            function update_movie($new_movie, $remove_movie){  // Updating the movie premiered
+            function delete_movie($deleteMovie){
+                global $pdo;
+
+                $sql = "DELETE from movies WHERE title = :title";
+
+                try{
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute(['title' => $deleteMovie]);
+
+                    if($stmt->rowCount() > 0){
+                        echo "MOVIE ".$deleteMovie." DELETED";
+                    }
+                    else{
+                        echo "MOVIE NOT FOUND";
+                    }
+                }
+                catch(PDOException $e){
+                    echo "ERROR: ".$e->getMessage();
+                }
+            }
+
+            /*function update_movie($new_movie, $remove_movie){  // Updating the movie premiered
                 global $premiered_movies;
                 global $avail_movies;
                 $counter = 0;
@@ -81,9 +102,10 @@
                 }
                 
                 print_r($premiered_movies); // for checking
-            }
+            }*/
 
-            add_movie("Roblox Movie 2");
+            //add_movie("Roblox Movie 2");
+            //delete_movie("Roblox Movie 2");
         ?>
 
     </body>
