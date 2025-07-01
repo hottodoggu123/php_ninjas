@@ -40,7 +40,7 @@ CREATE TABLE bookings (
 
 -- Insert sample admin user (password: admin123)
 INSERT INTO users (username, email, password, role) VALUES 
-('admin', 'admin@cinema.com', 'skibidi', 'admin');
+('admin', 'admin@cinema.com', 'admin123', 'admin');
 
 -- Insert sample movies
 INSERT INTO movies (title, description, genre, duration, rating, release_date, poster_url, status, price) VALUES 
