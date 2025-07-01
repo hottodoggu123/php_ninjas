@@ -34,7 +34,7 @@ $result = $stmt->get_result();
                 <h3><?php echo htmlspecialchars($movie['title']); ?></h3>
 
                 <?php if ($movie['status'] === 'now_showing'): ?>
-                    <a href="book.php?movie_id=<?php echo $movie['id']; ?>" class="button">Book Now</a>
+                    <a href="user/bookTicket.php?movie_id=<?php echo $movie['id']; ?>" class="button">Book Now</a>
                 <?php else: ?>
                     <a href="#" class="button" style="background-color: #888; cursor: not-allowed;">Coming Soon</a>
                 <?php endif; ?>

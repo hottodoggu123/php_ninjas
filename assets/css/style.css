@@ -235,3 +235,101 @@ form p {
   text-align: center;
   font-size: 0.95em;
 }
+
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+  margin: 10px auto;
+  justify-content: center;
+  max-width: 600px;
+}
+
+.seat-box {
+  padding: 20px;
+  font-size: 16px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #fff;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.2s;
+  position: relative;
+}
+
+.seat-box input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.seat-box:hover {
+  background-color: #ddd;
+}
+
+.seat-box.selected {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.seat-box.booked {
+  background-color: #ff6961;
+  cursor: not-allowed;
+}
+
+.booking-left {
+  flex: 1;
+  min-width: 300px;
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.booking-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.poster-container {
+  flex-shrink: 0;
+  max-width: 300px;
+}
+
+.booking-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 300px;
+  flex-shrink: 0;
+  margin: auto 0;
+  padding-right: 35px;
+}
+
+.booking-content-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.screen {
+  grid-column: 1 / -1;
+  background-color: #ccc;
+  color: #303030;
+  font-weight: bold;
+  padding: 12px 0;
+  margin-bottom: 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.3);
+  width: 100%;
+}
