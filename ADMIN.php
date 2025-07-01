@@ -1,3 +1,5 @@
+<!--THIS IS TESTER FOR ADMIN FUNCTIONS-->
+<!--FUNCTIONS WILL BE MOVED IN SPECIFIC FILES IF DONE-->
 <?php
     include 'includes/db.php';
 ?>
