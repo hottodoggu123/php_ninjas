@@ -56,7 +56,7 @@ h2 {
   border: 1px solid #ddd;
   border-radius: 12px;
   width: 260px;
-  height: 500px;
+  height: 450px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
@@ -72,7 +72,7 @@ h2 {
 
 .movie-card img {
   width: 100%;
-  height: 390px;
+  height: 350px;
   object-fit: cover;
   image-rendering: -webkit-optimize-contrast;
 }
@@ -97,11 +97,29 @@ h2 {
   text-decoration: none;
   border-radius: 5px;
   margin: 10px auto 20px auto;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
 }
 
 .button:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.primary-button {
   background-color: #303030;
+}
+
+.secondary-button {
+  background-color: #666;
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(48, 48, 48, 0.3);
 }
 
 footer {
@@ -211,8 +229,57 @@ nav {
 }
 
 form {
-  max-width: 400px;
+  max-width: 450px;
   margin: 0 auto;
+  padding: 30px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 2px solid #ddd;
+  font-size: 1em;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form select:focus {
+  border-color: #303030;
+  outline: none;
+}
+
+form label {
+  font-weight: bold;
+  color: #303030;
+  display: block;
+  margin-bottom: 8px;
+}
+
+form button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #303030;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button[type="submit"]:hover {
+  background-color: #505050;
 }
 
 form input[type="text"],
@@ -332,4 +399,464 @@ form p {
   border-radius: 10px;
   box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.3);
   width: 100%;
+}
+
+/* Movies page specific styles */
+.movies-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  width: 260px;
+  height: auto;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  cursor: pointer;
+}
+
+.movies-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.movies-card .poster-section {
+  width: 100%;
+  height: 390px;
+  overflow: hidden;
+}
+
+.movies-card .poster-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.movies-card .title-section {
+  padding: 20px 15px;
+  background: #f8f8f8;
+  border-top: 1px solid #ddd;
+}
+
+.movies-card .title-section h3 {
+  margin: 0;
+  font-size: 1.1em;
+  color: #303030;
+  font-weight: bold;
+}
+
+/* Clickable movie card hover effect for movies page */
+a:hover .movies-card {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* View movie page poster card */
+.view-movie-poster-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  width: 260px;
+  height: auto;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.view-movie-poster-card .poster-section {
+  width: 100%;
+  height: 390px;
+  overflow: hidden;
+}
+
+.view-movie-poster-card .poster-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.view-movie-poster-card .title-section {
+  padding: 20px 15px;
+  background: #f8f8f8;
+  border-top: 1px solid #ddd;
+}
+
+.view-movie-poster-card .title-section h3 {
+  margin: 0;
+  font-size: 1.1em;
+  color: #303030;
+  font-weight: bold;
+}
+
+/* Form and message styling improvements */
+.error-message {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 12px;
+  border: 1px solid #ffcdd2;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 0.95em;
+}
+
+.success-message {
+  color: #2e7d32;
+  background-color: #e8f5e9;
+  padding: 12px;
+  border: 1px solid #c8e6c9;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 0.95em;
+}
+
+.info-message {
+  color: #1976d2;
+  background-color: #e3f2fd;
+  padding: 12px;
+  border: 1px solid #bbdefb;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 0.95em;
+}
+
+/* Improved form styling */
+form {
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 30px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 2px solid #ddd;
+  font-size: 1em;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form select:focus {
+  border-color: #303030;
+  outline: none;
+}
+
+form label {
+  font-weight: bold;
+  color: #303030;
+  display: block;
+  margin-bottom: 8px;
+}
+
+form button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #303030;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button[type="submit"]:hover {
+  background-color: #505050;
+}
+
+/* Profile page styling */
+.profile-section {
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section h3 {
+  color: #303030;
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.booking-item {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border-left: 4px solid #303030;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.booking-item .booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.booking-item .movie-title {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #303030;
+}
+
+.booking-status {
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.85em;
+  font-weight: bold;
+}
+
+.booking-status.confirmed {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.booking-status.cancelled {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.booking-details {
+  color: #666;
+  font-size: 0.95em;
+  line-height: 1.4;
+}
+
+/* Page headers */
+.page-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #eee;
+}
+
+/* Showtime cards styling */
+.showtimes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.showtime-card {
+  background: #f8f8f8;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.showtime-card:hover {
+  background: #e8e8e8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.showtime-card .date {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #303030;
+}
+
+.showtime-card .time {
+  color: #666;
+  font-size: 0.95em;
+}
+
+/* No showtimes message */
+.no-showtimes {
+  background: #f8f8f8;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  color: #666;
+}
+
+/* Action buttons styling */
+.action-buttons {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.action-buttons .button {
+  margin: 0 10px;
+}
+
+/* Movie details styling */
+.movie-details {
+  margin-bottom: 30px;
+}
+
+.detail-row {
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row strong {
+  color: #303030;
+  margin-right: 10px;
+}
+
+.movie-description {
+  margin-bottom: 30px;
+}
+
+.movie-description h3 {
+  color: #303030;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 8px;
+}
+
+.movie-description p {
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Booking page improvements */
+.booking-wrapper {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.booking-left {
+  flex: 1 1 60%;
+  min-width: 400px;
+}
+
+.booking-right {
+  flex: 0 0 260px;
+  min-width: 260px;
+  margin-left: auto;
+}
+
+.booking-content-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Booking page specific improvements */
+.booking-showtime-section {
+  margin-bottom: 30px;
+}
+
+.booking-showtime-section label {
+  display: block;
+  font-weight: bold;
+  color: #303030;
+  margin-bottom: 10px;
+}
+
+.booking-showtime-section select {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: white;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.booking-showtime-section select:focus {
+  border-color: #303030;
+  outline: none;
+}
+
+.seat-selection-section {
+  margin-top: 30px;
+}
+
+.seat-selection-section label {
+  display: block;
+  font-weight: bold;
+  color: #303030;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Remove any container styling around seat grid */
+.seat-grid-container {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Status indicator styling */
+.status-showing {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.status-coming {
+  color: #ff6961;
+  font-weight: bold;
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .booking-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .booking-left,
+  .booking-right {
+    flex: none;
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .movies-card,
+  .view-movie-poster-card {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .movie-list {
+    justify-content: center;
+  }
+  
+  .seat-grid {
+    grid-template-columns: repeat(6, 1fr);
+    max-width: 400px;
+  }
 }

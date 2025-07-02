@@ -39,18 +39,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 <div class="container">
-    <h2>Login</h2>
+    <div class="page-header">
+        <h2>Login to Your Account</h2>
+    </div>
+    
     <?php if ($error): ?>
-        <p style="color: red;"><?php echo $error; ?></p>
+        <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
+    
     <form method="POST" action="">
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
 
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
 
-        <button type="submit" class="button">Login</button>
+        <button type="submit">Login</button>
+        
+        <p style="text-align: center; margin-top: 20px; color: #666;">
+            Don't have an account? <a href="register.php" style="color: #303030; text-decoration: underline;">Register here</a>
+        </p>
     </form>
 </div>
 

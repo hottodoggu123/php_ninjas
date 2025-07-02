@@ -29,30 +29,32 @@ $showtimes = $showtimeStmt->get_result();
 ?>
 
 <div class="container">
-  <div class="booking-wrapper" style="display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap;">
+  <div class="booking-wrapper">
 
     <!-- Left Panel -->
-    <div class="booking-left" style="flex: 1; min-width: 300px;">
+    <div class="booking-left">
       <h2>Book Ticket: <?php echo htmlspecialchars($movie['title']); ?></h2>
 
       <div class="booking-content-center">
-        <form method="GET" action="">
-            <input type="hidden" name="movie_id" value="<?php echo $movie_id; ?>">
+        <div class="booking-showtime-section">
+          <form method="GET" action="">
+              <input type="hidden" name="movie_id" value="<?php echo $movie_id; ?>">
 
-            <label for="showtime">Choose Showtime:</label><br>
-            <select name="showtime_id" id="showtime" required onchange="this.form.submit()">
-                <option value="">-- Select --</option>
-                <?php 
-                $showtimeStmt->execute();
-                $showtimes = $showtimeStmt->get_result();
-                while ($row = $showtimes->fetch_assoc()): ?>
-                    <option value="<?php echo $row['id']; ?>"
-                        <?php if (isset($_GET['showtime_id']) && $_GET['showtime_id'] == $row['id']) echo 'selected'; ?>>
-                        <?php echo $row['show_date'] . ' at ' . date('h:i A', strtotime($row['show_time'])); ?>
-                    </option>
-                <?php endwhile; ?>
-            </select><br><br>
-        </form>
+              <label for="showtime">Choose Showtime:</label>
+              <select name="showtime_id" id="showtime" required onchange="this.form.submit()">
+                  <option value="">-- Select Showtime --</option>
+                  <?php 
+                  $showtimeStmt->execute();
+                  $showtimes = $showtimeStmt->get_result();
+                  while ($row = $showtimes->fetch_assoc()): ?>
+                      <option value="<?php echo $row['id']; ?>"
+                          <?php if (isset($_GET['showtime_id']) && $_GET['showtime_id'] == $row['id']) echo 'selected'; ?>>
+                          <?php echo $row['show_date'] . ' at ' . date('h:i A', strtotime($row['show_time'])); ?>
+                      </option>
+                  <?php endwhile; ?>
+              </select>
+          </form>
+        </div>
 
         <?php
         if (isset($_GET['showtime_id'])):
@@ -70,10 +72,12 @@ $showtimes = $showtimeStmt->get_result();
             }
 
             // Seat selection form
+            echo "<div class='seat-selection-section'>";
             echo "<form method='POST' action='confirmBooking.php' id='seatForm'>";
             echo "<input type='hidden' name='movie_id' value='{$movie_id}'>";
             echo "<input type='hidden' name='showtime_id' value='{$showtime_id}'>";
             echo "<label>Select Your Seat(s):</label>";
+            echo "<div class='seat-grid-container'>";
             echo "<div class='screen'>SCREEN</div>";
             echo "<div class='seat-grid'>";
 
@@ -91,7 +95,10 @@ $showtimes = $showtimeStmt->get_result();
                 ";
             }
 
-            echo "</div><br><button type='submit' class='button'>Confirm Booking</button></form>";
+            echo "</div>";
+            echo "<button type='submit' class='button' style='margin-top: 20px;'>Confirm Booking</button>";
+            echo "</form>";
+            echo "</div>";
         endif;
         ?>
       </div>
@@ -99,7 +106,14 @@ $showtimes = $showtimeStmt->get_result();
 
     <!-- Right Panel -->
     <div class="booking-right">
-      <img src="../<?php echo htmlspecialchars($movie['poster_url']); ?>" alt="Movie Poster" class="movie-poster">
+      <div class="view-movie-poster-card">
+        <div class="poster-section">
+          <img src="../<?php echo htmlspecialchars($movie['poster_url']); ?>" alt="<?php echo htmlspecialchars($movie['title']); ?> Poster">
+        </div>
+        <div class="title-section">
+          <h3><?php echo htmlspecialchars($movie['title']); ?></h3>
+        </div>
+      </div>
     </div>
 
   </div>

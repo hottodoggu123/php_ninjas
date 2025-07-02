@@ -41,55 +41,59 @@ $bookings = $bookingStmt->get_result();
 
 <div class="container">
     <?php if (isset($_SESSION['message'])): ?>
-        <div style="padding: 10px; background-color: #d9edf7; color: #31708f; margin-bottom: 20px; border: 1px solid #bce8f1; border-radius: 5px;">
+        <div class="info-message">
             <?php
-            echo $_SESSION['message'];
+            echo htmlspecialchars($_SESSION['message']);
             unset($_SESSION['message']);
             ?>
         </div>
     <?php endif; ?>
 
-    <h2>My Profile</h2>
-    <p><strong>Username:</strong> <?php echo htmlspecialchars($_SESSION['username']); ?></p>
-    <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
-    <p><strong>Role:</strong> <?php echo htmlspecialchars($_SESSION['role']); ?></p>
+    <div class="page-header">
+        <h2>My Profile</h2>
+    </div>
 
-    <hr>
-    <h3>My Bookings</h3>
+    <div class="profile-section">
+        <h3>Account Information</h3>
+        <div class="booking-details">
+            <p><strong>Username:</strong> <?php echo htmlspecialchars($_SESSION['username']); ?></p>
+            <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
+            <p><strong>Role:</strong> <?php echo htmlspecialchars(ucfirst($_SESSION['role'])); ?></p>
+        </div>
+    </div>
 
-    <?php if ($bookings->num_rows > 0): ?>
-        <table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse: collapse;">
-            <tr>
-                <th>Movie</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Seats</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
+    <div class="profile-section">
+        <h3>My Bookings</h3>
+        
+        <?php if ($bookings->num_rows > 0): ?>
             <?php while ($row = $bookings->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($row['title']); ?></td>
-                    <td><?php echo $row['show_date']; ?></td>
-                    <td><?php echo date('h:i A', strtotime($row['show_time'])); ?></td>
-                    <td><?php echo htmlspecialchars($row['seats']); ?></td>
-                    <td><?php echo ucfirst($row['booking_status']); ?></td>
-                    <td>
+                <div class="booking-item">
+                    <div class="booking-header">
+                        <div class="movie-title"><?php echo htmlspecialchars($row['title']); ?></div>
+                        <div class="booking-status <?php echo $row['booking_status']; ?>">
+                            <?php echo ucfirst($row['booking_status']); ?>
+                        </div>
+                    </div>
+                    <div class="booking-details">
+                        <p><strong>Date:</strong> <?php echo date('F j, Y', strtotime($row['show_date'])); ?></p>
+                        <p><strong>Time:</strong> <?php echo date('h:i A', strtotime($row['show_time'])); ?></p>
+                        <p><strong>Seats:</strong> <?php echo htmlspecialchars($row['seats']); ?></p>
+                        
                         <?php if ($row['booking_status'] !== 'cancelled'): ?>
-                            <form method="POST" action="cancelBooking.php" onsubmit="return confirm('Are you sure you want to cancel this booking?');" style="margin: 0;">
+                            <form method="POST" action="cancelBooking.php" onsubmit="return confirm('Are you sure you want to cancel this booking?');" style="margin-top: 15px; display: inline;">
                                 <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
-                                <button type="submit" class="button" style="background: #d9534f;">Cancel</button>
+                                <button type="submit" style="background: #d32f2f; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 0.85em; cursor: pointer;">Cancel</button>
                             </form>
-                        <?php else: ?>
-                            Cancelled
                         <?php endif; ?>
-                    </td>
-                </tr>
+                    </div>
+                </div>
             <?php endwhile; ?>
-        </table>
-    <?php else: ?>
-        <p>No bookings found.</p>
-    <?php endif; ?>
+        <?php else: ?>
+            <div class="info-message">
+                No bookings found. <a href="../index.php" style="color: #1976d2; text-decoration: underline;">Browse movies</a> to make your first booking!
+            </div>
+        <?php endif; ?>
+    </div>
 </div>
 
 <?php include '../includes/footer.php'; ?>
