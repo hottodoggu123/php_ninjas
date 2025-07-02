@@ -29,16 +29,16 @@ $result = $stmt->get_result();
 
     <div class="movie-list">
         <?php while ($movie = $result->fetch_assoc()): ?>
-            <div class="movie-card">
-                <img src="<?php echo htmlspecialchars($movie['poster_url']); ?>" alt="<?php echo htmlspecialchars($movie['title']); ?>">
-                <h3><?php echo htmlspecialchars($movie['title']); ?></h3>
-
-                <?php if ($movie['status'] === 'now_showing'): ?>
-                    <a href="user/bookTicket.php?movie_id=<?php echo $movie['id']; ?>" class="button">Book Now</a>
-                <?php else: ?>
-                    <a href="#" class="button" style="background-color: #888; cursor: not-allowed;">Coming Soon</a>
-                <?php endif; ?>
-            </div>
+            <a href="user/viewMovie.php?movie_id=<?php echo $movie['id']; ?>" style="text-decoration: none; color: inherit;">
+                <div class="movies-card">
+                    <div class="poster-section">
+                        <img src="<?php echo htmlspecialchars($movie['poster_url']); ?>" alt="<?php echo htmlspecialchars($movie['title']); ?>">
+                    </div>
+                    <div class="title-section">
+                        <h3><?php echo htmlspecialchars($movie['title']); ?></h3>
+                    </div>
+                </div>
+            </a>
         <?php endwhile; ?>
     </div>
 </div>

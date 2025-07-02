@@ -21,7 +21,6 @@
         <nav>
             <ul class="nav-menu">
                 <li><a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/user/') || strpos($_SERVER['PHP_SELF'], '/admin/')) ? '../index.php' : 'index.php'; ?>" class="button">Home</a></li>
-                <li><a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/user/')) ? 'movies.php' : ((strpos($_SERVER['PHP_SELF'], '/admin/')) ? '../user/movies.php' : 'user/movies.php'); ?>" class="button">Movies</a></li>
 
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li><a class="button">Hi, <?php echo htmlspecialchars($_SESSION['username']); ?></a></li>

@@ -44,24 +44,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 <div class="container">
-    <h2>Create an Account</h2>
+    <div class="page-header">
+        <h2>Create Your Account</h2>
+    </div>
+    
     <?php if ($message): ?>
-        <p style="color: red;"><?php echo $message; ?></p>
+        <div class="error-message"><?php echo htmlspecialchars($message); ?></div>
     <?php endif; ?>
+    
     <form method="POST" action="">
-        <label>Username:</label><br>
-        <input type="text" name="username" required><br><br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
 
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
 
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
 
-        <label>Confirm Password:</label><br>
-        <input type="password" name="confirm_password" required><br><br>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
 
-        <button type="submit" class="button">Register</button>
+        <button type="submit">Create Account</button>
+        
+        <p style="text-align: center; margin-top: 20px; color: #666;">
+            Already have an account? <a href="login.php" style="color: #303030; text-decoration: underline;">Login here</a>
+        </p>
     </form>
 </div>
 
