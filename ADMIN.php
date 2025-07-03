@@ -71,6 +71,10 @@
                 }
             }
 
+            function manage_movie(){
+                echo "testing lang din lods";
+            }
+
             /*function update_movie($new_movie, $remove_movie){  // Updating the movie premiered
                 global $premiered_movies;
                 global $avail_movies;
@@ -104,6 +108,7 @@
                 print_r($premiered_movies); // for checking
             }*/
 
+            
             //add_movie("Roblox Movie 2");
             //delete_movie("Roblox Movie 2");
 
