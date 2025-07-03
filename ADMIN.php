@@ -15,13 +15,13 @@
                 global $conn;
 
                 // SQL Check if movie already exist on the database
-                $checking = "SELECT COUNT(*) FROM movies WHERE title = :title";
-                $stmt = mysqli_prepare($conn, $checking);
-                mysqli_stmt_bind_param($stmt, "s", $addedMovie);
-                mysqli_stmt_execute($stmt);
-                mysqli_stmt_bind_result($stmt, $exist);
-                mysqli_stmt_fetch($stmt);
-                mysqli_stmt_close($stmt);
+                $checking = "SELECT COUNT(*) FROM movies WHERE title = ?";
+                $check_stmt = mysqli_prepare($conn, $checking);
+                mysqli_stmt_bind_param($check_stmt, "s", $addedMovie);
+                mysqli_stmt_execute($check_stmt);
+                mysqli_stmt_bind_result($check_stmt, $exist);
+                mysqli_stmt_fetch($check_stmt);
+                mysqli_stmt_close($check_stmt);
 
                 // SQL adding movie
                 if($exist > 0){
@@ -42,12 +42,16 @@
                                 NOW()
                         )";
                     
-                    if(mysqli_stmt_execute($stmt)){
+                    $insert_stmt = mysqli_prepare($conn, $sql);
+                    mysqli_stmt_bind_param($insert_stmt, "s", $addedMovie);
+                    if(mysqli_stmt_execute($insert_stmt)){
                         echo "WORKED";
                     }
                     else{
                         echo "ERROR: ".mysqli_error($conn);
                     }
+
+                    mysqli_stmt_close($insert_stmt);
                 }
             }
 
