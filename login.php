@@ -9,18 +9,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    $stmt = $conn->prepare("SELECT id, username, password, role FROM users WHERE email = ?");
+    $stmt = $conn->prepare("SELECT id, username, display_name, password, role FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows === 1) {
-        $stmt->bind_result($id, $username, $storedPassword, $role);
+        $stmt->bind_result($id, $username, $display_name, $storedPassword, $role);
         $stmt->fetch();
 
         if ($password === $storedPassword) {
             $_SESSION['user_id'] = $id;
             $_SESSION['username'] = $username;
+            $_SESSION['display_name'] = $display_name;
             $_SESSION['role'] = $role;
 
             if ($role === 'admin') {

@@ -819,44 +819,619 @@ form button[type="submit"]:hover {
   text-align: center;
 }
 
-/* Status indicator styling */
-.status-showing {
-  color: #4CAF50;
+/* Admin Dashboard Styles */
+.admin-header {
+  margin-bottom: 30px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dashboard-date {
+  color: #666;
+  font-style: italic;
+  margin: 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  border-left: 4px solid #303030;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  margin-right: 15px;
+  color: #303030;
+}
+
+.stat-content {
+  flex-grow: 1;
+}
+
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #303030;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.admin-section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.admin-section h3 {
+  color: #303030;
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.status-card {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.status-card:hover {
+  transform: scale(1.03);
+}
+
+.status-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.status-showing { color: #2ecc71; }
+.status-coming { color: #f39c12; }
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.quick-action-btn {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  color: #303030;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: 1px solid #e9ecef;
+}
+
+.quick-action-btn:hover {
+  background: #303030;
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.quick-action-icon {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.recent-movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.recent-movie {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.recent-movie:hover {
+  transform: translateY(-5px);
+}
+
+.recent-movie-poster {
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+}
+
+.recent-movie-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.recent-movie-title {
+  padding: 10px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recent-movie-actions {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 10px 10px;
+}
+
+.movie-action-button {
+  padding: 5px;
+  font-size: 0.8rem;
+  color: #fff;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.edit-button {
+  background: #3498db;
+}
+
+.delete-button {
+  background: #e74c3c;
+}
+
+.no-data {
+  color: #666;
+  text-align: center;
+  padding: 20px;
+  background: #f8f8f8;
+  border-radius: 8px;
+}
+
+/* Delete movie page styles */
+.delete-confirmation {
+  text-align: center;
+}
+
+.delete-movie-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.delete-movie-poster {
+  width: 200px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.delete-movie-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.delete-movie-info h3 {
+  margin-top: 0;
+  color: #303030;
+}
+
+.delete-movie-info p {
+  margin: 20px 0;
+  color: #555;
+  max-width: 500px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.danger-button {
+  background-color: #e74c3c;
+}
+
+.danger-button:hover {
+  background-color: #c0392b;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Admin buttons */
+.admin-button {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #303030;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.admin-button:hover {
+  background-color: #505050;
+}
+
+/* Admin table styles */
+.admin-table-container {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.admin-table th {
+  background-color: #f8f9fa;
+  color: #303030;
   font-weight: bold;
 }
 
-.status-coming {
-  color: #ff6961;
-  font-weight: bold;
+.admin-table tbody tr:hover {
+  background-color: #f8f9fa;
 }
 
-/* Responsive design improvements */
-@media (max-width: 768px) {
-  .booking-wrapper {
-    flex-direction: column;
-    gap: 20px;
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.no-data {
+  text-align: center;
+  padding: 20px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Standard table styles */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.data-table th,
+.data-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.data-table th {
+  background-color: #303030;
+  color: white;
+  font-weight: 500;
+}
+
+.data-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.data-table tbody tr:hover {
+  background-color: #e9e9e9;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 30px;
+}
+
+/* Responsive design for admin dashboard */
+@media (max-width: 992px) {
+  .admin-grid {
+    grid-template-columns: 1fr;
   }
   
-  .booking-left,
-  .booking-right {
-    flex: none;
-    width: 100%;
-    min-width: auto;
-  }
-  
-  .movies-card,
-  .view-movie-poster-card {
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-  }
-  
-  .movie-list {
+  .nav-menu {
+    flex-wrap: wrap;
     justify-content: center;
   }
   
-  .seat-grid {
-    grid-template-columns: repeat(6, 1fr);
-    max-width: 400px;
+  .nav-container {
+    flex-direction: column;
+    height: auto;
+    padding: 15px 20px;
+  }
+  
+  .site-name {
+    margin-bottom: 10px;
+  }
+  
+  header {
+    height: auto;
+    min-height: 100px;
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .quick-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .quick-links {
+    grid-template-columns: 1fr;
+  }
+  
+  .recent-movies-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Admin Dashboard Specific Styles */
+.admin-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  width: 250px;
+  background-color: #303030;
+  color: white;
+  padding: 20px 0;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+}
+
+.admin-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.admin-logo h2 {
+  color: white;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  margin-bottom: 5px;
+}
+
+.sidebar-menu li a {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: all 0.3s;
+  border-left: 4px solid transparent;
+}
+
+.sidebar-menu li a:hover, 
+.sidebar-menu li a.active {
+  background: rgba(255,255,255,0.1);
+  border-left-color: #505050;
+}
+
+.sidebar-menu i {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}
+
+.admin-content {
+  flex-grow: 1;
+  padding: 20px;
+  margin-left: 250px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.admin-title h1 {
+  color: #303030;
+  margin: 0;
+}
+
+.admin-user {
+  display: flex;
+  align-items: center;
+}
+
+.admin-user span {
+  margin-right: 10px;
+}
+
+.icon-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.icon-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.icon-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+.icon-card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-right: 15px;
+}
+
+.icon-movies { background-color: #303030; color: white; }
+.icon-users { background-color: #505050; color: white; }
+.icon-bookings { background-color: #707070; color: white; }
+.icon-revenue { background-color: #404040; color: white; }
+
+.icon-card-content h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.5rem;
+  color: #303030;
+}
+
+.icon-card-content p {
+  margin: 0;
+  color: #7f8c8d;
+}
+
+.admin-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.admin-section-header h2 {
+  margin: 0;
+  color: #303030;
+}
+
+/* Responsive admin dashboard styles */
+@media (max-width: 992px) {
+  .admin-sidebar {
+    width: 70px;
+  }
+  
+  .admin-logo h2, .sidebar-menu span {
+    display: none;
+  }
+  
+  .sidebar-menu i {
+    margin-right: 0;
+    font-size: 1.2rem;
+  }
+  
+  .sidebar-menu li a {
+    padding: 15px;
+    justify-content: center;
+  }
+  
+  .admin-content {
+    margin-left: 70px;
+  }
+  
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .icon-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .icon-card-grid {
+    grid-template-columns: 1fr;
   }
 }
