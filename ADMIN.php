@@ -30,7 +30,7 @@
                 else{
                     $sql = "INSERT INTO movies (title, description, genre, duration, rating, release_date, poster_url, status, price, created_at)
                         VALUES (
-                                :title, 
+                                ?, 
                                 'roblox movie yes', 
                                 'comedy', 
                                 120, 
