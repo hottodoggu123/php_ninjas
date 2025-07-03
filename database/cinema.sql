@@ -34,17 +34,6 @@ CREATE TABLE showtimes (
     FOREIGN KEY (movie_id) REFERENCES movies(id)
 );
 
-CREATE TABLE booked_seats (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    showtime_id INT,
-    seat_number VARCHAR(10),
-    user_id INT,
-    booking_id INT,
-    FOREIGN KEY (showtime_id) REFERENCES showtimes(id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (booking_id) REFERENCES bookings(id)
-);
-
 CREATE TABLE bookings (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
@@ -58,6 +47,18 @@ CREATE TABLE bookings (
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (movie_id) REFERENCES movies(id)
 );
+
+CREATE TABLE booked_seats (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    showtime_id INT,
+    seat_number VARCHAR(10),
+    user_id INT,
+    booking_id INT,
+    FOREIGN KEY (showtime_id) REFERENCES showtimes(id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (booking_id) REFERENCES bookings(id)
+);
+
 
 -- Insert sample admin user (password: admin123)
 INSERT INTO users (username, email, password, role) VALUES 
