@@ -2,8 +2,6 @@
 <!--FUNCTIONS WILL BE MOVED IN SPECIFIC FILES IF DONE-->
 <?php
     include 'includes/db.php';
-
-    $conn = mysqli_connect("localhost", "root", "", "cinema_db");
 ?>
 
 <html>
@@ -14,16 +12,13 @@
     <body>
         <?php
             function add_movie($addedMovie){  // Adding of movies on the list
-                global $conn;
+                global $pdo;
 
                 // SQL Check if movie already exist on the database
                 $checking = "SELECT COUNT(*) FROM movies WHERE title = :title";
-                $stmt = mysqli_prepare($conn, $checking);
-                mysqli_stmt_bind_param($stmt, "s", $addedMovie);
-                mysqli_stmt_execute($stmt);
-                mysqli_stmt_bind_result($stmt, $exist);
-                mysqli_stmt_fetch($stmt);
-                mysqli_stmt_close($stmt);
+                $checkMatch = $pdo->prepare($checking);
+                $checkMatch->execute(['title' => $addedMovie]);
+                $exist = $checkMatch->fetchColumn();
 
                 // SQL adding movie
                 if($exist > 0){
@@ -44,11 +39,13 @@
                                 NOW()
                         )";
                     
-                    if(mysqli_stmt_execute($stmt)){
+                    try{
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->execute(['title' => $addedMovie]);
                         echo "WORKED";
                     }
-                    else{
-                        echo "ERROR: ".mysqli_error($conn);
+                    catch(PDOException $e){
+                        echo "ERROR: ".$e->getmessage();
                     }
                 }
             }
@@ -76,7 +73,6 @@
 
             function manage_movie(){
                 echo "testing lang din lods";
-                echo "TEST ULE";
             }
 
             /*function update_movie($new_movie, $remove_movie){  // Updating the movie premiered
@@ -113,7 +109,7 @@
             }*/
 
             
-            add_movie("Roblox Movie 2");
+            //add_movie("Roblox Movie 2");
             //delete_movie("Roblox Movie 2");
 
 
