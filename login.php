@@ -9,18 +9,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    $stmt = $conn->prepare("SELECT id, username, password, role FROM users WHERE email = ?");
+    $stmt = $conn->prepare("SELECT id, username, display_name, password, role FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows === 1) {
-        $stmt->bind_result($id, $username, $storedPassword, $role);
+        $stmt->bind_result($id, $username, $display_name, $storedPassword, $role);
         $stmt->fetch();
 
         if ($password === $storedPassword) {
             $_SESSION['user_id'] = $id;
             $_SESSION['username'] = $username;
+            $_SESSION['display_name'] = $display_name;
             $_SESSION['role'] = $role;
 
             if ($role === 'admin') {
@@ -39,18 +40,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 <div class="container">
-    <h2>Login</h2>
+    <div class="page-header">
+        <h2>Login to Your Account</h2>
+    </div>
+    
     <?php if ($error): ?>
-        <p style="color: red;"><?php echo $error; ?></p>
+        <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
+    
     <form method="POST" action="">
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
 
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
 
-        <button type="submit" class="button">Login</button>
+        <button type="submit">Login</button>
+        
+        <p style="text-align: center; margin-top: 20px; color: #666;">
+            Don't have an account? <a href="register.php" style="color: #303030; text-decoration: underline;">Register here</a>
+        </p>
     </form>
 </div>
 
