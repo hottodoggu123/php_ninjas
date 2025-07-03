@@ -12,13 +12,16 @@
     <body>
         <?php
             function add_movie($addedMovie){  // Adding of movies on the list
-                global $pdo;
+                global $conn;
 
                 // SQL Check if movie already exist on the database
                 $checking = "SELECT COUNT(*) FROM movies WHERE title = :title";
-                $checkMatch = $pdo->prepare($checking);
-                $checkMatch->execute(['title' => $addedMovie]);
-                $exist = $checkMatch->fetchColumn();
+                $stmt = mysqli_prepare($conn, $checking);
+                mysqli_stmt_bind_param($stmt, "s", $addedMovie);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_bind_result($stmt, $exist);
+                mysqli_stmt_fetch($stmt);
+                mysqli_stmt_close($stmt);
 
                 // SQL adding movie
                 if($exist > 0){
@@ -39,13 +42,11 @@
                                 NOW()
                         )";
                     
-                    try{
-                        $stmt = $pdo->prepare($sql);
-                        $stmt->execute(['title' => $addedMovie]);
+                    if(mysqli_stmt_execute($stmt)){
                         echo "WORKED";
                     }
-                    catch(PDOException $e){
-                        echo "ERROR: ".$e->getmessage();
+                    else{
+                        echo "ERROR: ".mysqli_error($conn);
                     }
                 }
             }
