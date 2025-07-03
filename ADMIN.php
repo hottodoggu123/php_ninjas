@@ -15,7 +15,7 @@
                 global $conn;
 
                 // SQL Check if movie already exist on the database
-                $checking = "SELECT COUNT(*) FROM movies WHERE title = :title";
+                $checking = "SELECT COUNT(*) FROM movies WHERE title = ?";
                 $stmt = mysqli_prepare($conn, $checking);
                 mysqli_stmt_bind_param($stmt, "s", $addedMovie);
                 mysqli_stmt_execute($stmt);
