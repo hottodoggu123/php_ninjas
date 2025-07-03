@@ -110,7 +110,7 @@
             }*/
 
             
-            //add_movie("Roblox Movie 2");
+            add_movie("Roblox Movie 2");
             //delete_movie("Roblox Movie 2");
 
 
