@@ -73,6 +73,7 @@
 
             function manage_movie(){
                 echo "testing lang din lods";
+                echo "TEST ULE";
             }
 
             /*function update_movie($new_movie, $remove_movie){  // Updating the movie premiered
@@ -109,7 +110,7 @@
             }*/
 
             
-            //add_movie("Roblox Movie 2");
+            add_movie("Roblox Movie 2");
             //delete_movie("Roblox Movie 2");
 
 
