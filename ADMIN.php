@@ -137,7 +137,6 @@
 
             
             add_movie("Roblox Movie 2");
-            manage_movie();
             //delete_movie("Roblox Movie 2");
 
 
