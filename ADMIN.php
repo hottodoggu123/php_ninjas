@@ -56,12 +56,12 @@
             }
 
             function delete_movie($deleteMovie){
-                global $pdo;
+                global $conn;
 
                 $sql = "DELETE from movies WHERE title = :title";
 
                 try{
-                    $stmt = $pdo->prepare($sql);
+                    $stmt = $conn->prepare($sql);
                     $stmt->execute(['title' => $deleteMovie]);
 
                     if($stmt->rowCount() > 0){
@@ -77,7 +77,29 @@
             }
 
             function manage_movie(){
-                echo "testing lang din lods";
+                global $conn;
+                $sql = "SELECT * FROM movies";
+                $result = mysqli_query($conn, $sql);
+                if ($result && mysqli_num_rows($result) > 0) {
+                    echo '<table border="1" cellpadding="5" cellspacing="0">';
+                    echo '<tr>';
+                    // Print table headers
+                    while ($fieldinfo = mysqli_fetch_field($result)) {
+                        echo '<th>' . htmlspecialchars($fieldinfo->name) . '</th>';
+                    }
+                    echo '</tr>';
+                    // Print table rows
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo '<tr>';
+                        foreach ($row as $cell) {
+                            echo '<td>' . htmlspecialchars($cell) . '</td>';
+                        }
+                        echo '</tr>';
+                    }
+                    echo '</table>';
+                } else {
+                    echo 'No movies found.';
+                }
             }
 
             /*function update_movie($new_movie, $remove_movie){  // Updating the movie premiered
@@ -114,7 +136,7 @@
             }*/
 
             
-            //add_movie("Roblox Movie 2");
+            add_movie("Roblox Movie 2");
             //delete_movie("Roblox Movie 2");
 
 
