@@ -2,13 +2,10 @@
 include '../includes/init.php';
 
 // Check if user is logged in and has admin privileges
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header('Location: ../login.php');
-    exit;
-}
+requireAdmin();
 
-// Fetch all movies
-$movies = $conn->query("SELECT * FROM movies");
+// Fetch all movies using service
+$movies = $movieService->getAllMovies();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,21 +18,8 @@ $movies = $conn->query("SELECT * FROM movies");
 </head>
 <body>
 <div class="admin-wrapper">
-    <!-- Sidebar -->
-    <aside class="admin-sidebar">
-        <div class="admin-logo">
-            <h2>Cinema Admin</h2>
-        </div>
-        <ul class="sidebar-menu">
-            <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-            <li><a href="manageMovies.php" class="active"><i class="fas fa-film"></i><span>Movies</span></a></li>
-            <li><a href="#"><i class="fas fa-users"></i><span>Users</span></a></li>
-            <li><a href="#"><i class="fas fa-ticket-alt"></i><span>Bookings</span></a></li>
-            <li><a href="#"><i class="fas fa-calendar-alt"></i><span>Showtimes</span></a></li>
-            <li><a href="#"><i class="fas fa-chart-bar"></i><span>Reports</span></a></li>
-            <li><a href="../logout.php"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
-        </ul>
-    </aside>
+    <?php renderAdminSidebar('manageMovies.php'); ?>
+    
     <!-- Main Content -->
     <main class="admin-content">
         <div class="admin-header">
@@ -43,7 +27,7 @@ $movies = $conn->query("SELECT * FROM movies");
                 <h1>Manage Movies</h1>
             </div>
             <div class="admin-user">
-                <span>Welcome, <?php echo htmlspecialchars($_SESSION['display_name'] ?? $_SESSION['username']); ?></span>
+                <span>Welcome, <?php echo e($_SESSION['display_name'] ?? $_SESSION['username']); ?></span>
                 <span><?php echo date('F j, Y'); ?></span>
             </div>
         </div>
@@ -57,17 +41,21 @@ $movies = $conn->query("SELECT * FROM movies");
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <?php foreach ($movies->fetch_fields() as $field): ?>
-                                    <th><?php echo htmlspecialchars($field->name); ?></th>
+                                <?php 
+                                $movies->data_seek(0);
+                                $firstRow = $movies->fetch_assoc();
+                                $movies->data_seek(0);
+                                foreach (array_keys($firstRow) as $field): ?>
+                                    <th><?php echo e($field); ?></th>
                                 <?php endforeach; ?>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php $movies->data_seek(0); while($row = $movies->fetch_assoc()): ?>
+                        <?php while($row = $movies->fetch_assoc()): ?>
                             <tr>
                                 <?php foreach ($row as $cell): ?>
-                                    <td><?php echo htmlspecialchars($cell); ?></td>
+                                    <td><?php echo e($cell); ?></td>
                                 <?php endforeach; ?>
                                 <td>
                                     <a href="editMovie.php?id=<?php echo $row['id']; ?>" class="movie-action-button edit-button">Edit</a>
