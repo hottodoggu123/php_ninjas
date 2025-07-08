@@ -4,46 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cinema Booking</title>
-
-    <?php
-    // Determine correct path for CSS regardless of subfolder depth
-    $cssPath = (strpos($_SERVER['PHP_SELF'], '/user/') !== false || strpos($_SERVER['PHP_SELF'], '/admin/') !== false)
-        ? '../assets/css/style.css'
-        : 'assets/css/style.css';
-    ?>
-    <link rel="stylesheet" href="<?php echo $cssPath; ?>">
+    <link rel="stylesheet" href="<?php echo getAssetPath('assets/css/style.css'); ?>">
 </head>
 <body>
 
 <header>
     <div class="nav-container">
         <div class="site-name">Cinema Booking</div>
+        
         <nav>
             <ul class="nav-menu">
+                <!-- Search form -->
+                <li class="search-item">
+                    <form action="<?php echo getLinkPath('user/advancedSearch.php'); ?>" method="GET">
+                        <input type="text" name="search" placeholder="Search...">
+                        <button type="submit" class="search-button">Search</button>
+                    </form>
+                </li>
                 <li><a href="<?php 
-                    if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-                        echo (strpos($_SERVER['PHP_SELF'], '/admin/')) ? 'dashboard.php' : 'admin/dashboard.php';
+                    if (isAdmin()) {
+                        echo getLinkPath('admin/dashboard.php');
                     } else {
-                        echo (strpos($_SERVER['PHP_SELF'], '/user/') || strpos($_SERVER['PHP_SELF'], '/admin/')) ? '../index.php' : 'index.php';
+                        echo getLinkPath('index.php');
                     }
                 ?>" class="button">Home</a></li>
 
-                <?php if (isset($_SESSION['user_id'])): ?>
-                    <li><a class="button">Hi, <?php echo htmlspecialchars($_SESSION['display_name'] ?? $_SESSION['username']); ?></a></li>
+                <?php if (isLoggedIn()): ?>
+                    <li><a class="button">Hi, <?php echo e($_SESSION['display_name'] ?? $_SESSION['username']); ?></a></li>
                     
-                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                    <?php if (isAdmin()): ?>
                         <!-- Admin Navigation -->
-                        <li><a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/admin/')) ? 'dashboard.php' : 'admin/dashboard.php'; ?>" class="button">Admin Dashboard</a></li>
-                        <li><a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/admin/')) ? 'manageMovies.php' : 'admin/manageMovies.php'; ?>" class="button">Manage Movies</a></li>
+                        <li><a href="<?php echo getLinkPath('admin/dashboard.php'); ?>" class="button">Admin Dashboard</a></li>
+                        <li><a href="<?php echo getLinkPath('admin/manageMovies.php'); ?>" class="button">Manage Movies</a></li>
                     <?php else: ?>
                         <!-- Regular User Navigation -->
-                        <li><a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/user/')) ? 'profile.php' : 'user/profile.php'; ?>" class="button">Profile</a></li>
+                        <li><a href="<?php echo getLinkPath('user/profile.php'); ?>" class="button">Profile</a></li>
                     <?php endif; ?>
                     
-                    <li><a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/user/') || strpos($_SERVER['PHP_SELF'], '/admin/')) ? '../logout.php' : 'logout.php'; ?>" class="button">Logout</a></li>
+                    <li><a href="<?php echo getLinkPath('logout.php'); ?>" class="button">Logout</a></li>
                 <?php else: ?>
-                    <li><a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/user/') || strpos($_SERVER['PHP_SELF'], '/admin/')) ? '../login.php' : 'login.php'; ?>" class="button">Login</a></li>
-                    <li><a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/user/') || strpos($_SERVER['PHP_SELF'], '/admin/')) ? '../register.php' : 'register.php'; ?>" class="button">Register</a></li>
+                    <li><a href="<?php echo getLinkPath('login.php'); ?>" class="button">Login</a></li>
+                    <li><a href="<?php echo getLinkPath('register.php'); ?>" class="button">Register</a></li>
                 <?php endif; ?>
             </ul>
         </nav>

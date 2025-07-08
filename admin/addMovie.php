@@ -1,44 +1,166 @@
 <?php
-    global $conn;
+include '../includes/init.php';
 
-    // SQL Check if movie already exist on the database
-    $checking = "SELECT COUNT(*) FROM movies WHERE title = ?";
-    $check_stmt = mysqli_prepare($conn, $checking);
-    mysqli_stmt_bind_param($check_stmt, "s", $addedMovie);
-    mysqli_stmt_execute($check_stmt);
-    mysqli_stmt_bind_result($check_stmt, $exist);
-    mysqli_stmt_fetch($check_stmt);
-    mysqli_stmt_close($check_stmt);
+// Check if user is logged in and has admin privileges
+requireAdmin();
 
-    // SQL adding movie
-    if($exist > 0){
-        echo "Movie Exist";
-    }
-    else{
-        $sql = "INSERT INTO movies (title, description, genre, duration, rating, release_date, poster_url, status, price, created_at)
-                VALUES (
-                    ?, 
-                    'roblox movie yes', 
-                    'comedy', 
-                    120, 
-                    'G', 
-                    '2025-06-30', 
-                    'https://m.media-amazon.com/images/M/MV5BNDFhZTU1MzAtODkwOC00NzkxLWE0YTEtN2Y2MGU0ODllYmFhXkEyXkFqcGc@._V1_', 
-                    'now_showing', 
-                    99.0,
-                    NOW()
-                )";
-                    
-        $insert_stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($insert_stmt, "s", $addedMovie);
+$message = '';
+$success = false;
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $movieData = [
+        'title' => trim($_POST['title']),
+        'description' => trim($_POST['description']),
+        'genre' => trim($_POST['genre']),
+        'duration' => (int)$_POST['duration'],
+        'rating' => trim($_POST['rating']),
+        'release_date' => $_POST['release_date'],
+        'poster_url' => trim($_POST['poster_url']),
+        'status' => $_POST['status'],
+        'price' => (float)$_POST['price']
+    ];
+    
+    // Basic validation
+    if (empty($movieData['title']) || empty($movieData['description']) || empty($movieData['poster_url'])) {
+        $message = "Please fill in all required fields.";
+    } else {
+        // Check if movie already exists
+        $existingMovie = $movieService->getMoviesByStatus('now_showing');
+        $titleExists = false;
         
-        if(mysqli_stmt_execute($insert_stmt)){
-            echo "WORKED";
+        if ($existingMovie) {
+            while ($movie = $existingMovie->fetch_assoc()) {
+                if (strtolower($movie['title']) === strtolower($movieData['title'])) {
+                    $titleExists = true;
+                    break;
+                }
+            }
         }
-        else{
-            echo "ERROR: ".mysqli_error($conn);
+        
+        if ($titleExists) {
+            $message = "A movie with this title already exists.";
+        } else {
+            $success = $movieService->createMovie($movieData);
+            if ($success) {
+                $message = "Movie \"" . e($movieData['title']) . "\" has been successfully added.";
+            } else {
+                $message = "Error adding movie. Please try again.";
+            }
         }
-                   
-        mysqli_stmt_close($insert_stmt);
     }
+}
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Movie - Cinema Booking Admin</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-wrapper">
+        <?php renderAdminSidebar('manageMovies.php'); ?>
+        
+        <!-- Main Content -->
+        <main class="admin-content">
+            <div class="admin-header">
+                <div class="admin-title">
+                    <h1>Add New Movie</h1>
+                </div>
+                <div class="admin-user">
+                    <span>Welcome, <?php echo e($_SESSION['display_name'] ?? $_SESSION['username']); ?></span>
+                    <span><?php echo date('F j, Y'); ?></span>
+                </div>
+            </div>
+            
+            <div class="admin-section">
+                <?php if ($message): ?>
+                    <div class="<?php echo $success ? 'success-message' : 'error-message'; ?>">
+                        <?php echo $message; ?>
+                        <?php if ($success): ?>
+                            <div class="button-container" style="margin-top: 20px;">
+                                <a href="manageMovies.php" class="button primary-button">Back to Manage Movies</a>
+                                <a href="addMovie.php" class="button secondary-button">Add Another Movie</a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+                
+                <?php if (!$success): ?>
+                <div class="form-container">
+                    <form method="POST" class="movie-form">
+                        <div class="form-group">
+                            <label for="title">Movie Title *</label>
+                            <input type="text" id="title" name="title" required value="<?php echo isset($_POST['title']) ? e($_POST['title']) : ''; ?>">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description">Description *</label>
+                            <textarea id="description" name="description" required rows="4"><?php echo isset($_POST['description']) ? e($_POST['description']) : ''; ?></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="genre">Genre</label>
+                                <input type="text" id="genre" name="genre" value="<?php echo isset($_POST['genre']) ? e($_POST['genre']) : ''; ?>">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="duration">Duration (minutes)</label>
+                                <input type="number" id="duration" name="duration" min="1" value="<?php echo isset($_POST['duration']) ? $_POST['duration'] : ''; ?>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="rating">Rating</label>
+                                <select id="rating" name="rating">
+                                    <option value="G" <?php echo (isset($_POST['rating']) && $_POST['rating'] === 'G') ? 'selected' : ''; ?>>G</option>
+                                    <option value="PG" <?php echo (isset($_POST['rating']) && $_POST['rating'] === 'PG') ? 'selected' : ''; ?>>PG</option>
+                                    <option value="PG-13" <?php echo (isset($_POST['rating']) && $_POST['rating'] === 'PG-13') ? 'selected' : ''; ?>>PG-13</option>
+                                    <option value="R" <?php echo (isset($_POST['rating']) && $_POST['rating'] === 'R') ? 'selected' : ''; ?>>R</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="release_date">Release Date</label>
+                                <input type="date" id="release_date" name="release_date" value="<?php echo isset($_POST['release_date']) ? $_POST['release_date'] : ''; ?>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="poster_url">Poster URL *</label>
+                            <input type="url" id="poster_url" name="poster_url" required value="<?php echo isset($_POST['poster_url']) ? e($_POST['poster_url']) : ''; ?>">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select id="status" name="status">
+                                    <option value="now_showing" <?php echo (isset($_POST['status']) && $_POST['status'] === 'now_showing') ? 'selected' : ''; ?>>Now Showing</option>
+                                    <option value="coming_soon" <?php echo (isset($_POST['status']) && $_POST['status'] === 'coming_soon') ? 'selected' : ''; ?>>Coming Soon</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="price">Ticket Price (₱)</label>
+                                <input type="number" id="price" name="price" min="0" step="0.01" value="<?php echo isset($_POST['price']) ? $_POST['price'] : '250.00'; ?>">
+                            </div>
+                        </div>
+                        
+                        <div class="button-container">
+                            <button type="submit" class="button primary-button">Add Movie</button>
+                            <a href="manageMovies.php" class="button secondary-button">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+                <?php endif; ?>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
