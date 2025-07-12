@@ -80,6 +80,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             
             <div class="admin-section">
+                <div class="admin-section-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2><?php echo e($movie['title']); ?></h2>
+                    <a href="manageMovies.php" class="movie-action-button edit-button" style="font-size: 0.8em; padding: 4px 8px;">Back to Movies</a>
+                </div>
+                
                 <?php if ($message): ?>
                     <div class="<?php echo $success ? 'success-message' : 'error-message'; ?>">
                         <?php echo $message; ?>
@@ -90,30 +95,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <form method="POST" class="movie-form">
                         <div class="form-group">
                             <label for="title">Movie Title *</label>
-                            <input type="text" id="title" name="title" required value="<?php echo e($movie['title']); ?>">
+                            <input type="text" id="title" name="title" required value="<?php echo e($movie['title']); ?>" style="width: 100%; padding: 8px; box-sizing: border-box;">
                         </div>
                         
                         <div class="form-group">
                             <label for="description">Description *</label>
-                            <textarea id="description" name="description" required rows="4"><?php echo e($movie['description']); ?></textarea>
+                            <textarea id="description" name="description" required rows="4" style="width: 100%; padding: 8px; box-sizing: border-box;"><?php echo e($movie['description']); ?></textarea>
                         </div>
                         
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="genre">Genre</label>
-                                <input type="text" id="genre" name="genre" value="<?php echo e($movie['genre']); ?>">
+                                <input type="text" id="genre" name="genre" value="<?php echo e($movie['genre']); ?>" style="width: 100%; padding: 8px; box-sizing: border-box;">
                             </div>
                             
                             <div class="form-group">
                                 <label for="duration">Duration (minutes)</label>
-                                <input type="number" id="duration" name="duration" min="1" value="<?php echo $movie['duration']; ?>">
+                                <input type="number" id="duration" name="duration" min="1" value="<?php echo $movie['duration']; ?>" style="width: 100%; padding: 8px; box-sizing: border-box;">
                             </div>
                         </div>
                         
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="rating">Rating</label>
-                                <select id="rating" name="rating">
+                                <select id="rating" name="rating" style="width: 100%; padding: 8px; box-sizing: border-box;">
                                     <option value="G" <?php echo ($movie['rating'] === 'G') ? 'selected' : ''; ?>>G</option>
                                     <option value="PG" <?php echo ($movie['rating'] === 'PG') ? 'selected' : ''; ?>>PG</option>
                                     <option value="PG-13" <?php echo ($movie['rating'] === 'PG-13') ? 'selected' : ''; ?>>PG-13</option>
@@ -123,19 +128,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             
                             <div class="form-group">
                                 <label for="release_date">Release Date</label>
-                                <input type="date" id="release_date" name="release_date" value="<?php echo $movie['release_date']; ?>">
+                                <input type="date" id="release_date" name="release_date" value="<?php echo $movie['release_date']; ?>" style="width: 100%; padding: 8px; box-sizing: border-box;">
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label for="poster_url">Poster URL *</label>
-                            <input type="url" id="poster_url" name="poster_url" required value="<?php echo e($movie['poster_url']); ?>">
+                            <input type="url" id="poster_url" name="poster_url" required value="<?php echo e($movie['poster_url']); ?>" style="width: 100%; padding: 8px; box-sizing: border-box;">
                         </div>
                         
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="status">Status</label>
-                                <select id="status" name="status">
+                                <select id="status" name="status" style="width: 100%; padding: 8px; box-sizing: border-box;">
                                     <option value="now_showing" <?php echo ($movie['status'] === 'now_showing') ? 'selected' : ''; ?>>Now Showing</option>
                                     <option value="coming_soon" <?php echo ($movie['status'] === 'coming_soon') ? 'selected' : ''; ?>>Coming Soon</option>
                                 </select>
@@ -143,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             
                             <div class="form-group">
                                 <label for="price">Ticket Price (₱)</label>
-                                <input type="number" id="price" name="price" min="0" step="0.01" value="<?php echo $movie['price']; ?>">
+                                <input type="number" id="price" name="price" min="0" step="0.01" value="<?php echo $movie['price']; ?>" style="width: 100%; padding: 8px; box-sizing: border-box;">
                             </div>
                         </div>
                         
