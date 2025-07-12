@@ -86,10 +86,9 @@ function renderAdminSidebar($activePage = '') {
     $menuItems = [
         'dashboard.php' => ['Dashboard', 'fas fa-tachometer-alt'],
         'manageMovies.php' => ['Movies', 'fas fa-film'],
-        '#users' => ['Users', 'fas fa-users'],
-        '#bookings' => ['Bookings', 'fas fa-ticket-alt'],
-        '#showtimes' => ['Showtimes', 'fas fa-calendar-alt'],
-        '#reports' => ['Reports', 'fas fa-chart-bar'],
+        'manageUsers.php' => ['Users', 'fas fa-users'],
+        'manageBookings.php' => ['Bookings', 'fas fa-ticket-alt'],
+        'manageShowtimes.php' => ['Showtimes', 'fas fa-calendar-alt'],
         '../logout.php' => ['Logout', 'fas fa-sign-out-alt']
     ];
     
