@@ -71,8 +71,6 @@ include 'includes/header.php';
                     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                         $error = "Please enter a valid email address";
                     } else {
-                        // In a real application, you'd send an email or save to database
-                        // For this demo, we'll just show a success message
                         $message = "Thank you for your message! We will get back to you soon.";
                         
                         // Reset the form fields

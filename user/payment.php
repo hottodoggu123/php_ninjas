@@ -42,10 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $paymentMethod
         );
         
-        // Clear booking data from session
         unset($_SESSION['booking_data']);
         
-        // Set success message and redirect to booking confirmation page
         $_SESSION['message'] = "Payment completed successfully! Your booking has been confirmed.";
         $_SESSION['booking_id'] = $bookingId;
         
@@ -54,13 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
     } catch (Exception $e) {
         $error = "Payment failed: " . $e->getMessage();
-        // Make sure the booking data is still available for the error message links
     }
 }
 ?>
 
 <div class="container" style="margin-top: 30px;">
-    <!-- Page Header -->
     <div class="card">
         <div class="card-header" style="background: #303030; color: white;">
             <h1 style="color: white; margin: 0;">Payment</h1>

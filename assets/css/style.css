@@ -240,8 +240,6 @@ h2 {
     }
 }
 
-/* Simple footer styles now integrated with site-footer above */
-
 nav {
   margin-top: 15px;
 }
@@ -302,14 +300,12 @@ nav {
   color: #303030;
 }
 
-/* Active tab styling */
 .toggle-active {
   font-weight: bold;
   color: #303030;
   opacity: 1;
 }
 
-/* Inactive tab styling - with full link overrides */
 .toggle-inactive,
 .toggle-inactive:link,
 .toggle-inactive:visited,
@@ -320,20 +316,17 @@ nav {
   transition: 0.2s;
 }
 
-/* Hover effect for inactive */
 .toggle-inactive:hover {
   color: #505050;
   opacity: 1;
   text-decoration: none;
 }
 
-/* Divider line between toggle items */
 .toggle-divider {
   margin: 0 8px;
   color: #aaa;
 }
 
-/* Form styling - consolidated */
 form {
   max-width: 450px;
   margin: 0 auto;
@@ -544,13 +537,11 @@ form p {
   font-weight: bold;
 }
 
-/* Clickable movie card hover effect for movies page */
 a:hover .movies-card {
   transform: scale(1.05);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* View movie page poster card */
 .view-movie-poster-card {
   background: #ffffff;
   border: 1px solid #ddd;
@@ -590,7 +581,6 @@ a:hover .movies-card {
   font-weight: bold;
 }
 
-/* Form and message styling improvements */
 .error-message {
   color: #d32f2f;
   background-color: #ffebee;
@@ -1021,8 +1011,6 @@ a:hover .movies-card {
   gap: 10px;
   margin-top: 20px;
 }
-
-/* Seat styles consolidated with the main seat-box styling above */
 
 .view-movie-poster-card {
   border: 1px solid #ddd;
@@ -1758,7 +1746,6 @@ a:hover .movies-card {
     margin-top: -10px;
 }
 
-/* Clear fix for footers */
 .clear-fix {
     clear: both;
     width: 100%;
@@ -2463,7 +2450,6 @@ textarea.form-control {
   transform: translateY(-2px);
 }
 
-/* Enhanced Booking Process Styles */
 .booking-process-container {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: calc(100vh - 200px);
@@ -2709,7 +2695,6 @@ textarea.form-control {
   box-shadow: 0 10px 25px rgba(108, 117, 125, 0.4);
 }
 
-/* Enhanced Seat Selection */
 .seat-selection-enhanced {
   background: #f8f9fa;
   border-radius: 15px;
@@ -2876,7 +2861,6 @@ textarea.form-control {
   }
 }
 
-/* Fix for viewMovie.php poster positioning */
 .booking-wrapper {
   display: flex;
   gap: 30px;
@@ -2937,7 +2921,6 @@ textarea.form-control {
   }
 }
 
-/* Card styling for consistent design */
 .card {
   background: #ffffff;
   border: 1px solid #ddd;
@@ -2996,7 +2979,6 @@ textarea.form-control {
   margin-left: 16.666%;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .col-md-4,
   .col-md-6,

@@ -67,13 +67,10 @@ CREATE TABLE booked_seats (
 );
 
 
--- Insert sample admin user (password: admin123)
 INSERT INTO users (username, email, password, role) VALUES 
 ('admin', 'admin@cinema.com', 'admin123', 'admin');
 
--- Insert sample movies (updated for July 17, 2025)
 INSERT INTO movies (title, description, genre, duration, rating, release_date, poster_url, status, price) VALUES 
--- Now Showing Movies (15 movies)
 ('How to Train Your Dragon', 'The beloved animated series returns with new adventures in the hidden world', 'Animation', 104, 'PG', '2025-06-13', 'assets/images/httyd_new.jpg', 'now_showing', 480.00),
 ('M3GAN 2.0', 'The killer doll returns with upgraded features and deadlier intentions', 'Horror', 102, 'PG-13', '2025-06-27', 'assets/images/megan2.jpg', 'now_showing', 520.00),
 ('Jurassic World: Rebirth', 'Dinosaurs once again threaten humanity in this explosive new chapter', 'Adventure', 147, 'PG-13', '2025-07-02', 'assets/images/jurassic_rebirth.jpg', 'now_showing', 550.00),
