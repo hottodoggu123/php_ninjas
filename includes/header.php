@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinema Booking</title>
+    <title>CineXpress</title>
     <link rel="stylesheet" href="<?php echo getAssetPath('assets/css/style.css'); ?>">
 </head>
 <body>
 
 <header>
     <div class="nav-container">
-        <div class="site-name">Cinema Booking</div>
+        <div class="site-name">CineXpress</div>
         
         <nav>
             <ul class="nav-menu">

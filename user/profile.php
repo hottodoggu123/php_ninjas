@@ -17,8 +17,8 @@ $stmt->bind_result($email);
 $stmt->fetch();
 $stmt->close();
 
-// Fetch bookings with seat numbers
-$bookingStmt = $conn->prepare("
+// Fetch upcoming bookings with seat numbers
+$upcomingBookingStmt = $conn->prepare("
     SELECT 
         b.id, 
         m.title, 
@@ -30,13 +30,34 @@ $bookingStmt = $conn->prepare("
     JOIN booked_seats bs ON b.id = bs.booking_id
     JOIN showtimes s ON bs.showtime_id = s.id
     JOIN movies m ON b.movie_id = m.id
-    WHERE b.user_id = ?
+    WHERE b.user_id = ? AND s.show_date >= CURDATE()
+    GROUP BY b.id
+    ORDER BY s.show_date ASC, s.show_time ASC
+");
+$upcomingBookingStmt->bind_param("i", $userId);
+$upcomingBookingStmt->execute();
+$upcomingBookings = $upcomingBookingStmt->get_result();
+
+// Fetch past bookings with seat numbers
+$pastBookingStmt = $conn->prepare("
+    SELECT 
+        b.id, 
+        m.title, 
+        s.show_date, 
+        s.show_time, 
+        b.booking_status,
+        GROUP_CONCAT(bs.seat_number ORDER BY bs.seat_number ASC) AS seats
+    FROM bookings b
+    JOIN booked_seats bs ON b.id = bs.booking_id
+    JOIN showtimes s ON bs.showtime_id = s.id
+    JOIN movies m ON b.movie_id = m.id
+    WHERE b.user_id = ? AND s.show_date < CURDATE()
     GROUP BY b.id
     ORDER BY s.show_date DESC, s.show_time DESC
 ");
-$bookingStmt->bind_param("i", $userId);
-$bookingStmt->execute();
-$bookings = $bookingStmt->get_result();
+$pastBookingStmt->bind_param("i", $userId);
+$pastBookingStmt->execute();
+$pastBookings = $pastBookingStmt->get_result();
 ?>
 
 <div class="container">
@@ -63,10 +84,10 @@ $bookings = $bookingStmt->get_result();
     </div>
 
     <div class="profile-section">
-        <h3>My Bookings</h3>
+        <h3>Upcoming Bookings</h3>
         
-        <?php if ($bookings->num_rows > 0): ?>
-            <?php while ($row = $bookings->fetch_assoc()): ?>
+        <?php if ($upcomingBookings->num_rows > 0): ?>
+            <?php while ($row = $upcomingBookings->fetch_assoc()): ?>
                 <div class="booking-item">
                     <div class="booking-header">
                         <div class="movie-title"><?php echo htmlspecialchars($row['title']); ?></div>
@@ -90,7 +111,33 @@ $bookings = $bookingStmt->get_result();
             <?php endwhile; ?>
         <?php else: ?>
             <div class="info-message">
-                No bookings found. <a href="../index.php" style="color: #1976d2; text-decoration: underline;">Browse movies</a> to make your first booking!
+                No upcoming bookings found. <a href="../index.php" style="color: #1976d2; text-decoration: underline;">Browse movies</a> to make a new booking!
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <div class="profile-section">
+        <h3>Past Bookings</h3>
+        
+        <?php if ($pastBookings->num_rows > 0): ?>
+            <?php while ($row = $pastBookings->fetch_assoc()): ?>
+                <div class="booking-item">
+                    <div class="booking-header">
+                        <div class="movie-title"><?php echo htmlspecialchars($row['title']); ?></div>
+                        <div class="booking-status <?php echo $row['booking_status']; ?>">
+                            <?php echo ucfirst($row['booking_status']); ?>
+                        </div>
+                    </div>
+                    <div class="booking-details">
+                        <p><strong>Date:</strong> <?php echo date('F j, Y', strtotime($row['show_date'])); ?></p>
+                        <p><strong>Time:</strong> <?php echo date('h:i A', strtotime($row['show_time'])); ?></p>
+                        <p><strong>Seats:</strong> <?php echo htmlspecialchars($row['seats']); ?></p>
+                    </div>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <div class="info-message">
+                No past bookings found.
             </div>
         <?php endif; ?>
     </div>

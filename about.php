@@ -5,7 +5,7 @@ include 'includes/header.php';
 
 <div class="container">
     <div class="page-header">
-        <h1>About PHP Ninjas Cinema</h1>
+        <h1>About CineXpress</h1>
     </div>
     
         <div class="about-section">
@@ -19,7 +19,7 @@ include 'includes/header.php';
                             </div>
                             <h4>skibidi?</h4>
                             <p class="team-role">Chief Executive Officer</p>
-                            <p>With over 20 years in the entertainment industry, skibidi brings a wealth of experience and passion for cinema to PHP Ninjas.</p>
+                            <p>With over 20 years in the entertainment industry, skibidi brings a wealth of experience and passion for cinema to CineXpress.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
