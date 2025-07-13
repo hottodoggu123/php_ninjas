@@ -274,6 +274,7 @@ nav {
 .nav-menu li a {
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 36px;
   padding: 0 16px;
   background-color: #505050;
@@ -281,6 +282,9 @@ nav {
   border-radius: 5px;
   text-decoration: none;
   font-size: 0.95em;
+  box-sizing: border-box;
+  margin: 0;
+  line-height: 1;
 }
 
 .nav-menu li a:hover {
@@ -1614,6 +1618,7 @@ a:hover .movies-card {
   background: none;
   box-shadow: none;
   align-items: center;
+  gap: 0;
 }
 
 .search-item input[type="text"] {
@@ -1629,6 +1634,9 @@ a:hover .movies-card {
   font-family: "Segoe UI", sans-serif;
   font-size: 0.95em;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  line-height: 1;
 }
 
 .search-item .search-button {
@@ -1647,6 +1655,7 @@ a:hover .movies-card {
   display: flex;
   align-items: center;
   justify-content: center;
+  line-height: 1;
 }
 
 .search-item .search-button:hover {

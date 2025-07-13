@@ -70,7 +70,7 @@ unset($_SESSION['booking_id']);
                             <h3>Booking Details</h3>
                         </div>
                         <div class="card-body">
-                            <h4 style="margin-top: 0; color: #303030; margin-bottom: 20px; text-align: center;"><?php echo htmlspecialchars($booking['title']); ?></h4>
+                            <h2 style="margin-top: 0; color: #303030; margin-bottom: 20px; text-align: center; font-size: 2em;"><?php echo htmlspecialchars($booking['title']); ?></h2>
                             
                             <div style="background: #f8f8f8; padding: 25px; border-radius: 10px; margin-bottom: 20px;">
                                 <table class="booking-details-table" style="width: 100%; border-collapse: collapse;">
@@ -136,7 +136,7 @@ unset($_SESSION['booking_id']);
         
         <div class="action-buttons" style="text-align: center; margin-top: 30px;">
             <a href="../index.php" style="display: block; width: 200px; margin: 0 auto 15px auto; padding: 12px 25px; background: #303030; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease;">Return to Home</a>
-            <a href="profile.php" style="display: block; width: 200px; margin: 0 auto; padding: 12px 25px; background: #303030; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease;">View All Bookings</a>
+            <a href="profile.php" style="display: block; width: 200px; margin: 0 auto 15px auto; padding: 12px 25px; background: #303030; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease;">View All Bookings</a>
         </div>
     </div>
 </div>
