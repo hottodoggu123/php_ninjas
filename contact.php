@@ -27,7 +27,7 @@ include 'includes/header.php';
                     <div class="contact-icon">✉️</div>
                     <div class="contact-details">
                         <h3>Email</h3>
-                        <p><a href="mailto:info@phpninjascinema.com">info@phpninjascinema.com</a></p>
+                        <p><a href="mailto:info@cinexpress.com">info@cinexpress.com</a></p>
                         <p class="text-muted">We'll respond as soon as possible</p>
                     </div>
                 </div>

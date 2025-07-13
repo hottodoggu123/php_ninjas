@@ -56,7 +56,7 @@ if ($isLoggedIn) {
         <div class="bookings-container">
             <?php if ($upcomingBookings && $upcomingBookings->num_rows > 0): ?>
                 <?php while ($booking = $upcomingBookings->fetch_assoc()): ?>
-                    <?php renderBookingCard($booking, true); ?>
+                    <?php renderBookingCard($booking, false); ?>
                 <?php endwhile; ?>
             <?php else: ?>
                 <div class="no-bookings">

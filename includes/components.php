@@ -93,7 +93,7 @@ function renderAdminSidebar($activePage = '') {
     ];
     
     echo '<aside class="admin-sidebar">';
-    echo '<div class="admin-logo"><h2>Cinema Admin</h2></div>';
+    echo '<div class="admin-logo"><h2>CineXpress Admin</h2></div>';
     echo '<ul class="sidebar-menu">';
     
     foreach ($menuItems as $link => $item) {
