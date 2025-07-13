@@ -52,7 +52,7 @@ class UserService {
     public function getUpcomingBookings($userId, $limit = 5) {
         try {
             $stmt = $this->conn->prepare("
-                SELECT 
+                SELECT DISTINCT
                     b.id, 
                     m.title, 
                     m.poster_url,
@@ -65,8 +65,8 @@ class UserService {
                     GROUP_CONCAT(bs.seat_number ORDER BY bs.seat_number ASC) AS seats
                 FROM bookings b
                 JOIN movies m ON b.movie_id = m.id
-                JOIN showtimes s ON b.showtime_id = s.id
-                LEFT JOIN booked_seats bs ON b.id = bs.booking_id
+                JOIN booked_seats bs ON b.id = bs.booking_id
+                JOIN showtimes s ON bs.showtime_id = s.id
                 WHERE b.user_id = ? AND s.show_date >= CURDATE() AND b.booking_status != 'cancelled'
                 GROUP BY b.id
                 ORDER BY s.show_date ASC, s.show_time ASC
@@ -87,7 +87,7 @@ class UserService {
     public function getPastBookings($userId, $limit = 5) {
         try {
             $stmt = $this->conn->prepare("
-                SELECT 
+                SELECT DISTINCT
                     b.id, 
                     m.title,
                     m.poster_url, 
@@ -100,8 +100,8 @@ class UserService {
                     GROUP_CONCAT(bs.seat_number ORDER BY bs.seat_number ASC) AS seats
                 FROM bookings b
                 JOIN movies m ON b.movie_id = m.id
-                JOIN showtimes s ON b.showtime_id = s.id
-                LEFT JOIN booked_seats bs ON b.id = bs.booking_id
+                JOIN booked_seats bs ON b.id = bs.booking_id
+                JOIN showtimes s ON bs.showtime_id = s.id
                 WHERE b.user_id = ? AND s.show_date < CURDATE()
                 GROUP BY b.id
                 ORDER BY s.show_date DESC, s.show_time DESC

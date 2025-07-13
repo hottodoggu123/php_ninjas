@@ -6,8 +6,8 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['booking_id'])) {
-    $bookingId = (int) $_POST['booking_id'];
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+    $bookingId = (int) $_GET['id'];
     $userId = $_SESSION['user_id'];
 
     // Check if the booking belongs to the user and is not already cancelled
@@ -41,10 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['booking_id'])) {
     $update->bind_param("i", $bookingId);
     $update->execute();
     $update->close();
-
-    // We keep the seat records but mark the booking as cancelled
-    // When a booking is cancelled, the seats become available again for others to book
-    // The bookTicket.php page checks for the booking status when determining which seats are occupied
 
     $_SESSION['message'] = "Booking cancelled successfully and seats freed.";
     header("Location: profile.php");

@@ -23,8 +23,9 @@ $stmt->execute();
 $result = $stmt->get_result()->fetch_assoc();
 
 // Calculate total
+$seatsBooked = count($bookingData['seats']);
 $price = $bookingData['price'] ?? $result['price'];
-$totalAmount = $price * count($bookingData['seats']);
+$totalAmount = $price * $seatsBooked;
 
 // Handle payment form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -58,19 +59,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="container">
-    <div class="page-header">
-        <h2>Payment</h2>
+<div class="container" style="margin-top: 30px;">
+    <!-- Page Header -->
+    <div class="card">
+        <div class="card-header" style="background: #303030; color: white;">
+            <h1 style="color: white; margin: 0;">Payment</h1>
+        </div>
     </div>
-
+    
     <?php if (isset($error)): ?>
-        <div class="alert alert-danger">
+        <div style="background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
             <?php echo e($error); ?>
             <div style="margin-top: 15px;">
                 <?php if (isset($bookingData) && isset($bookingData['movie_id']) && isset($bookingData['showtime_id'])): ?>
-                    <a href="bookTicket.php?movie_id=<?php echo e($bookingData['movie_id']); ?>&showtime_id=<?php echo e($bookingData['showtime_id']); ?>" class="button">Return to Seat Selection</a>
+                    <a href="bookTicket.php?movie_id=<?php echo e($bookingData['movie_id']); ?>&showtime_id=<?php echo e($bookingData['showtime_id']); ?>" style="background: #6c757d; color: white; padding: 8px 16px; border: none; border-radius: 5px; text-decoration: none; display: inline-block;">Return to Seat Selection</a>
                 <?php else: ?>
-                    <a href="../index.php" class="button">Return to Home</a>
+                    <a href="../index.php" style="background: #6c757d; color: white; padding: 8px 16px; border: none; border-radius: 5px; text-decoration: none; display: inline-block;">Return to Home</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -84,88 +88,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="card-body">
                     <form method="post" id="payment-form">
-                        <div class="payment-methods">
-                            <h4>Select Payment Method</h4>
-                            <div class="payment-method-options">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="credit_card" value="credit_card" checked>
-                                    <label class="form-check-label payment-label" for="credit_card">
-                                        <span class="payment-icon">💳</span>
-                                        <span>Credit Card</span>
-                                    </label>
+                        <div style="margin-bottom: 30px;">
+                            <h4 style="margin-bottom: 20px; color: #303030;">Select Payment Method</h4>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                                <label style="display: flex; align-items: center; padding: 15px; border: 2px solid #ddd; border-radius: 10px; cursor: pointer; background: #f8f8f8; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#303030'" onmouseout="this.style.borderColor='#ddd'">
+                                    <input type="radio" name="payment_method" value="credit_card" checked style="margin-right: 10px;">
+                                    <span style="font-size: 1.5em; margin-right: 10px;">💳</span>
+                                    <span style="font-weight: 600;">Credit Card</span>
+                                </label>
+                                
+                                <label style="display: flex; align-items: center; padding: 15px; border: 2px solid #ddd; border-radius: 10px; cursor: pointer; background: #f8f8f8; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#303030'" onmouseout="this.style.borderColor='#ddd'">
+                                    <input type="radio" name="payment_method" value="debit_card" style="margin-right: 10px;">
+                                    <span style="font-size: 1.5em; margin-right: 10px;">💳</span>
+                                    <span style="font-weight: 600;">Debit Card</span>
+                                </label>
+                                
+                                <label style="display: flex; align-items: center; padding: 15px; border: 2px solid #ddd; border-radius: 10px; cursor: pointer; background: #f8f8f8; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#303030'" onmouseout="this.style.borderColor='#ddd'">
+                                    <input type="radio" name="payment_method" value="paypal" style="margin-right: 10px;">
+                                    <span style="font-size: 1.5em; margin-right: 10px;">🅿️</span>
+                                    <span style="font-weight: 600;">PayPal</span>
+                                </label>
+                                
+                                <label style="display: flex; align-items: center; padding: 15px; border: 2px solid #ddd; border-radius: 10px; cursor: pointer; background: #f8f8f8; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#303030'" onmouseout="this.style.borderColor='#ddd'">
+                                    <input type="radio" name="payment_method" value="mobile_payment" style="margin-right: 10px;">
+                                    <span style="font-size: 1.5em; margin-right: 10px;">📱</span>
+                                    <span style="font-weight: 600;">Mobile Payment</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 30px;">
+                            <h4 style="margin-bottom: 20px; color: #303030;">Payment Information</h4>
+                            <div style="background: #f8f8f8; padding: 20px; border-radius: 10px;">
+                                <div style="margin-bottom: 15px;">
+                                    <label for="card_number" style="display: block; margin-bottom: 5px; font-weight: 600;">Card Number</label>
+                                    <input type="text" id="card_number" placeholder="XXXX XXXX XXXX XXXX" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
                                 </div>
                                 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="debit_card" value="debit_card">
-                                    <label class="form-check-label payment-label" for="debit_card">
-                                        <span class="payment-icon">💳</span>
-                                        <span>Debit Card</span>
-                                    </label>
+                                <div class="row">
+                                    <div class="col-md-6" style="margin-bottom: 15px;">
+                                        <label for="expiry_date" style="display: block; margin-bottom: 5px; font-weight: 600;">Expiry Date</label>
+                                        <input type="text" id="expiry_date" placeholder="MM/YY" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                                    </div>
+                                    <div class="col-md-6" style="margin-bottom: 15px;">
+                                        <label for="cvv" style="display: block; margin-bottom: 5px; font-weight: 600;">CVV</label>
+                                        <input type="text" id="cvv" placeholder="XXX" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                                    </div>
                                 </div>
                                 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="paypal" value="paypal">
-                                    <label class="form-check-label payment-label" for="paypal">
-                                        <span class="payment-icon">🅿️</span>
-                                        <span>PayPal</span>
-                                    </label>
-                                </div>
-                                
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="mobile_payment" value="mobile_payment">
-                                    <label class="form-check-label payment-label" for="mobile_payment">
-                                        <span class="payment-icon">📱</span>
-                                        <span>Mobile Payment</span>
-                                    </label>
+                                <div style="margin-bottom: 15px;">
+                                    <label for="card_holder" style="display: block; margin-bottom: 5px; font-weight: 600;">Cardholder Name</label>
+                                    <input type="text" id="card_holder" placeholder="Name as appears on card" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="payment-form" id="credit-card-form">
-                            <div class="form-group">
-                                <label for="card_number">Card Number</label>
-                                <input type="text" class="form-control" id="card_number" placeholder="XXXX XXXX XXXX XXXX">
+                        <div style="text-align: center; margin-top: 30px;">
+                            <div style="margin-bottom: 15px;">
+                                <button type="submit" style="background: #303030; color: white; padding: 12px 30px; border: none; border-radius: 5px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 200px;" onmouseover="this.style.background='#404040'" onmouseout="this.style.background='#303030'">Complete Payment</button>
                             </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="expiry_date">Expiry Date</label>
-                                        <input type="text" class="form-control" id="expiry_date" placeholder="MM/YY">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="cvv">CVV</label>
-                                        <input type="text" class="form-control" id="cvv" placeholder="XXX">
-                                    </div>
-                                </div>
+                            <div>
+                                <a href="confirmBooking.php" style="background: #6c757d; color: white; padding: 12px 30px; border: none; border-radius: 5px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block; width: 200px;" onmouseover="this.style.background='#5a6268'" onmouseout="this.style.background='#6c757d'">Back to Confirmation</a>
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="card_holder">Cardholder Name</label>
-                                <input type="text" class="form-control" id="card_holder" placeholder="Name as appears on card">
-                            </div>
-                        </div>
-                        
-                        <div class="payment-form" id="paypal-form" style="display: none;">
-                            <div class="paypal-info">
-                                <p>You'll be redirected to PayPal to complete your payment securely.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="payment-form" id="mobile-payment-form" style="display: none;">
-                            <div class="form-group">
-                                <label for="phone_number">Phone Number</label>
-                                <input type="tel" class="form-control" id="phone_number" placeholder="Enter your mobile number">
-                            </div>
-                            <div class="mobile-payment-info">
-                                <p>You'll receive a payment confirmation code on your mobile.</p>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Pay Now</button>
                         </div>
                     </form>
                 </div>
@@ -178,29 +162,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h3>Order Summary</h3>
                 </div>
                 <div class="card-body">
-                    <div class="booking-summary">
-                        <div class="movie-title">
-                            <h4><?php echo e($result['title']); ?></h4>
+                    <div style="padding: 5px;">
+                        <h2 style="color: #303030; margin-bottom: 15px; margin-top: 0px; text-align: center; font-size: 2em;"><?php echo e($bookingData['movie_title']); ?></h2>
+                        
+                        <div style="background: #f8f8f8; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span><strong>Date:</strong></span>
+                                <span><?php echo formatDate($bookingData['show_date']); ?></span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span><strong>Time:</strong></span>
+                                <span><?php echo formatTime($bookingData['show_time']); ?></span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span><strong>Seats:</strong></span>
+                                <span><?php echo implode(", ", $bookingData['seats']); ?></span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span><strong>Tickets:</strong></span>
+                                <span><?php echo $seatsBooked; ?></span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span><strong>Price per Ticket:</strong></span>
+                                <span><?php echo formatCurrency($bookingData['price']); ?></span>
+                            </div>
                         </div>
                         
-                        <div class="booking-details">
-                            <p><strong>Date:</strong> <?php echo formatDate($result['show_date']); ?></p>
-                            <p><strong>Time:</strong> <?php echo formatTime($result['show_time']); ?></p>
-                            <p><strong>Seats:</strong> <?php echo e(implode(', ', $bookingData['seats'])); ?></p>
-                        </div>
-                        
-                        <div class="price-summary">
-                            <div class="price-row">
-                                <span>Ticket Price:</span>
-                                <span><?php echo formatCurrency($result['price']); ?></span>
-                            </div>
-                            <div class="price-row">
-                                <span>Number of Seats:</span>
-                                <span><?php echo count($bookingData['seats']); ?></span>
-                            </div>
-                            <div class="price-row total">
-                                <span>Total Amount:</span>
-                                <span><?php echo formatCurrency($totalAmount); ?></span>
+                        <div style="background: #303030; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 1.2em; font-weight: 700;">Total Amount:</span>
+                                <span style="font-size: 1.3em; font-weight: 700;"><?php echo formatCurrency($totalAmount); ?></span>
                             </div>
                         </div>
                     </div>
@@ -209,157 +200,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const paymentMethods = document.querySelectorAll('input[name="payment_method"]');
-        const creditCardForm = document.getElementById('credit-card-form');
-        const paypalForm = document.getElementById('paypal-form');
-        const mobilePaymentForm = document.getElementById('mobile-payment-form');
-        
-        paymentMethods.forEach(method => {
-            method.addEventListener('change', function() {
-                // Hide all forms
-                creditCardForm.style.display = 'none';
-                paypalForm.style.display = 'none';
-                mobilePaymentForm.style.display = 'none';
-                
-                // Show the selected form
-                if (this.value === 'credit_card' || this.value === 'debit_card') {
-                    creditCardForm.style.display = 'block';
-                } else if (this.value === 'paypal') {
-                    paypalForm.style.display = 'block';
-                } else if (this.value === 'mobile_payment') {
-                    mobilePaymentForm.style.display = 'block';
-                }
-            });
-        });
-        
-        // For demonstration purposes only - would be replaced with actual validation
-        const paymentForm = document.getElementById('payment-form');
-        paymentForm.addEventListener('submit', function(e) {
-            // In a real application, we would validate the form and process the payment
-            // For now, we'll just let the form submit
-        });
-    });
-</script>
-
-<?php include '../includes/footer.php'; ?>
-                                    <div class="form-group">
-                                        <label for="expiry_date">Expiry Date</label>
-                                        <input type="text" class="form-control" id="expiry_date" placeholder="MM/YY">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="cvv">CVV</label>
-                                        <input type="text" class="form-control" id="cvv" placeholder="XXX">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="card_holder">Cardholder Name</label>
-                                <input type="text" class="form-control" id="card_holder" placeholder="Name as appears on card">
-                            </div>
-                        </div>
-                        
-                        <div class="payment-form" id="paypal-form" style="display: none;">
-                            <div class="paypal-info">
-                                <p>You'll be redirected to PayPal to complete your payment securely.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="payment-form" id="mobile-payment-form" style="display: none;">
-                            <div class="form-group">
-                                <label for="phone_number">Phone Number</label>
-                                <input type="tel" class="form-control" id="phone_number" placeholder="Enter your mobile number">
-                            </div>
-                            <div class="mobile-payment-info">
-                                <p>You'll receive a payment confirmation code on your mobile.</p>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Pay Now</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Order Summary</h3>
-                </div>
-                <div class="card-body">
-                    <div class="booking-summary">
-                        <div class="movie-title">
-                            <h4><?php echo htmlspecialchars($result['title']); ?></h4>
-                        </div>
-                        
-                        <div class="booking-details">
-                            <p><strong>Date:</strong> <?php echo date('F d, Y', strtotime($result['show_date'])); ?></p>
-                            <p><strong>Time:</strong> <?php echo date('h:i A', strtotime($result['show_time'])); ?></p>
-                            <p><strong>Seats:</strong> <?php echo htmlspecialchars(implode(', ', $bookingData['seats'])); ?></p>
-                        </div>
-                        
-                        <div class="price-summary">
-                            <div class="price-row">
-                                <span>Ticket Price:</span>
-                                <span>₱<?php echo number_format($result['price'], 2); ?></span>
-                            </div>
-                            <div class="price-row">
-                                <span>Number of Seats:</span>
-                                <span><?php echo count($bookingData['seats']); ?></span>
-                            </div>
-                            <div class="price-row total">
-                                <span>Total Amount:</span>
-                                <span>₱<?php echo number_format($totalAmount, 2); ?></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const paymentMethods = document.querySelectorAll('input[name="payment_method"]');
-        const creditCardForm = document.getElementById('credit-card-form');
-        const paypalForm = document.getElementById('paypal-form');
-        const mobilePaymentForm = document.getElementById('mobile-payment-form');
-        
-        paymentMethods.forEach(method => {
-            method.addEventListener('change', function() {
-                // Hide all forms
-                creditCardForm.style.display = 'none';
-                paypalForm.style.display = 'none';
-                mobilePaymentForm.style.display = 'none';
-                
-                // Show the selected form
-                if (this.value === 'credit_card' || this.value === 'debit_card') {
-                    creditCardForm.style.display = 'block';
-                } else if (this.value === 'paypal') {
-                    paypalForm.style.display = 'block';
-                } else if (this.value === 'mobile_payment') {
-                    mobilePaymentForm.style.display = 'block';
-                }
-            });
-        });
-        
-        // For demonstration purposes only - would be replaced with actual validation
-        const paymentForm = document.getElementById('payment-form');
-        paymentForm.addEventListener('submit', function(e) {
-            // In a real application, we would validate the form and process the payment
-            // For now, we'll just let the form submit
-        });
-    });
-</script>
 
 <?php include '../includes/footer.php'; ?>

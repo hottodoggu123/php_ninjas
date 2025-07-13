@@ -23,7 +23,7 @@ $errorMessage = $_GET['error'] ?? '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Showtimes - Cinema Admin</title>
+    <title>Manage Showtimes - CineXpress Admin</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -109,9 +109,7 @@ $errorMessage = $_GET['error'] ?? '';
                                     ?>
                                     <tr>
                                         <td><?php echo e($showtime['id']); ?></td>
-                                        <td>
-                                            <strong><?php echo e($showtime['movie_title'] ?? $showtime['title']); ?></strong>
-                                        </td>
+                                        <td><?php echo e($showtime['movie_title'] ?? $showtime['title']); ?></td>
                                         <td><?php echo formatDate($showtime['show_date']); ?></td>
                                         <td><?php echo formatTime($showtime['show_time']); ?></td>
                                         <td><?php echo e($showtime['total_seats'] ?? 40); ?></td>
