@@ -162,8 +162,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h3>Order Summary</h3>
                 </div>
                 <div class="card-body">
-                    <div style="padding: 10px;">
-                        <h4 style="color: #303030; margin-bottom: 15px; text-align: center;"><?php echo e($bookingData['movie_title']); ?></h4>
+                    <div style="padding: 5px;">
+                        <h2 style="color: #303030; margin-bottom: 15px; margin-top: 0px; text-align: center; font-size: 2em;"><?php echo e($bookingData['movie_title']); ?></h2>
                         
                         <div style="background: #f8f8f8; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">

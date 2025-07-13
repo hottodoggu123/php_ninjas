@@ -21,8 +21,8 @@ if ($isLoggedIn) {
     // Get user information
     $user = $userService->getUserById($userId);
     
-    // Get upcoming bookings
-    $upcomingBookings = $userService->getUpcomingBookings($userId, 5);
+    // Get upcoming bookings (increased limit to show more bookings)
+    $upcomingBookings = $userService->getUpcomingBookings($userId, 4);
     
     // Get statistics
     $stats = $userService->getUserStats($userId);

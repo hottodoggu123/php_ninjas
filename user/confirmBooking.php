@@ -39,7 +39,7 @@ if (isset($_SESSION['booking_data']) && !$_POST) {
                         <h3>Booking Summary</h3>
                     </div>
                     <div class='card-body'>
-                        <h4 style='margin-top: 0; color: #303030; margin-bottom: 20px; text-align: center;'>" . e($movie['title']) . "</h4>
+                        <h2 style='margin-top: 0; color: #303030; margin-bottom: 20px; text-align: center; font-size: 2em;'>" . e($movie['title']) . "</h2>
                         
                         <div style='background: #f8f8f8; padding: 25px; border-radius: 10px; margin-bottom: 20px;'>
                             <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 15px;'>
@@ -170,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <h3>Booking Summary</h3>
                     </div>
                     <div class='card-body'>
-                        <h4 style='margin-top: 0; color: #303030; margin-bottom: 20px; text-align: center;'>" . e($movie['title']) . "</h4>
+                        <h2 style='margin-top: 0; color: #303030; margin-bottom: 20px; text-align: center; font-size: 2em;'>" . e($movie['title']) . "</h2>
                         
                         <div style='background: #f8f8f8; padding: 25px; border-radius: 10px; margin-bottom: 20px;'>
                             <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 15px;'>

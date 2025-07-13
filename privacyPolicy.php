@@ -6,7 +6,6 @@ include 'includes/header.php';
 <div class="container">
     <div class="page-header">
         <h1>Privacy Policy</h1>
-        <p>Last updated: July 6, 2025</p>
     </div>
     
     <div class="privacy-content">
@@ -80,8 +79,8 @@ include 'includes/header.php';
             <p>If you have any questions about this privacy policy or our privacy practices, please contact us:</p>
             <ul>
                 <li>By email: privacy@cinexpress.com</li>
-                <li>By phone: +63 2 1234 5678</li>
-                <li>By mail: CineXpress, 123 Web Dev Street, Coding City, Philippines</li>
+                <li>By phone: (555) 123-4567</li>
+                <li>By mail: 123 Cinema Boulevard, Manila, Philippines 1000</li>
             </ul>
         </div>
     </div>

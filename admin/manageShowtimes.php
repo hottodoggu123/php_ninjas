@@ -109,9 +109,7 @@ $errorMessage = $_GET['error'] ?? '';
                                     ?>
                                     <tr>
                                         <td><?php echo e($showtime['id']); ?></td>
-                                        <td>
-                                            <strong><?php echo e($showtime['movie_title'] ?? $showtime['title']); ?></strong>
-                                        </td>
+                                        <td><?php echo e($showtime['movie_title'] ?? $showtime['title']); ?></td>
                                         <td><?php echo formatDate($showtime['show_date']); ?></td>
                                         <td><?php echo formatTime($showtime['show_time']); ?></td>
                                         <td><?php echo e($showtime['total_seats'] ?? 40); ?></td>

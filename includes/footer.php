@@ -11,7 +11,6 @@
                 <li><a href="<?php echo $base_url; ?>about.php">About Us</a></li>
                 <li><a href="<?php echo $base_url; ?>contact.php">Contact Us</a></li>
                 <li><a href="<?php echo $base_url; ?>privacyPolicy.php">Privacy Policy</a></li>
-                <li><a href="<?php echo $base_url; ?>user/advancedSearch.php">Advanced Search</a></li>
             </ul>
         </div>
         
