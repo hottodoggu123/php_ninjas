@@ -12,36 +12,52 @@ include 'includes/header.php';
             <h2>Meet Our Team</h2>
             <div class="team-members">
                 <div class="row">
+
                     <div class="col-md-4">
                         <div class="team-member">
                             <div class="team-photo">
-                                <img src="assets/images/ceo.jpg" alt="CEO" class="img-fluid rounded-circle">
+                                <img src="assets/team/edra.jpg" alt="edra" class="img-fluid rounded-circle">
                             </div>
-                            <h4>skibidi?</h4>
-                            <p class="team-role">Chief Executive Officer</p>
-                            <p>With over 20 years in the entertainment industry, skibidi brings a wealth of experience and passion for cinema to CineXpress.</p>
+                            <h4>Edra, Rei Yzmaehl A.</h4>
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="team-member">
                             <div class="team-photo">
-                                <img src="assets/images/operations.jpg" alt="Operations Director" class="img-fluid rounded-circle">
+                                <img src="assets/team/marquez.jpg" alt="marquez" class="img-fluid rounded-circle">
                             </div>
-                            <h4>skibidi?skibidi?</h4>
-                            <p class="team-role">Operations Director</p>
-                            <p>skibidi ensures that all of our theaters run smoothly, delivering exceptional experiences to every customer.</p>
+                            <h4>Marquez, Deux Marq O.</h4>
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="team-member">
                             <div class="team-photo">
-                                <img src="assets/images/tech.jpg" alt="Technology Officer" class="img-fluid rounded-circle">
+                                <img src="assets/team/mejia.jpg" alt="mejia" class="img-fluid rounded-circle">
                             </div>
-                            <h4>skibidi?skibidi?skibidi?</h4>
-                            <p class="team-role">Chief Technology Officer</p>
-                            <p>skibidi leads our technical team, keeping our theaters equipped with the latest and greatest in cinema technology.</p>
+                            <h4>Mejia, Klyde Hedrick S.</h4>
                         </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <div class="team-member">
+                            <div class="team-photo">
+                                <img src="assets/team/obmerga.jpg" alt="obmerga" class="img-fluid rounded-circle">
+                            </div>
+                            <h4>Obmerga, John Janiel S.</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="team-member">
+                            <div class="team-photo">
+                                <img src="assets/team/taguiam.jpg" alt="taguiam" class="img-fluid rounded-circle">
+                            </div>
+                            <h4>Taguiam, Johann Patrick</h4>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
