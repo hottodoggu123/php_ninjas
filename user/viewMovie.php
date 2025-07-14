@@ -32,7 +32,6 @@ $showtimes = $showtimeStmt->get_result();
 <div class="container">
   <div class="booking-wrapper">
 
-    <!-- Left Panel - Movie Details -->
     <div class="booking-left">
       <h2>Movie Details</h2>
       
@@ -102,7 +101,6 @@ $showtimes = $showtimeStmt->get_result();
       </div>
     </div>
 
-    <!-- Right Panel - Movie Poster -->
     <div class="booking-right">
       <div class="view-movie-poster-card">
         <div class="poster-section">
