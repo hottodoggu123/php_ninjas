@@ -25,7 +25,6 @@ $showtimes = $bookingService->getShowtimes($movie_id);
 ?>
 
 <div class="container">
-    <!-- Page Header with proper background -->
     <div class="card">
         <div class="card-header" style="background: #303030; color: white;">
             <h1 style="color: white; margin: 0;">Book Ticket: <?php echo e($movie['title']); ?></h1>
@@ -39,7 +38,6 @@ $showtimes = $bookingService->getShowtimes($movie_id);
         </div>
         <div class="card-body">
             <div class="row">
-                <!-- Movie Details on the Left -->
                 <div class="col-md-8">
                     <div style="padding-right: 30px;">
                         <h3 style="color: #303030; margin-bottom: 20px;"><?php echo e($movie['title']); ?></h3>
@@ -51,7 +49,6 @@ $showtimes = $bookingService->getShowtimes($movie_id);
                             <p style="color: #666; line-height: 1.6;"><?php echo e($movie['description']); ?></p>
                         </div>
                         
-                        <!-- Showtime Selection -->
                         <?php if (!isset($_GET['showtime_id'])): ?>
                             <h4 style="color: #303030; margin: 30px 0 20px 0;">Select Showtime</h4>
                             <?php if ($showtimes->num_rows > 0): ?>
@@ -81,7 +78,6 @@ $showtimes = $bookingService->getShowtimes($movie_id);
                     </div>
                 </div>
                 
-                <!-- Movie Poster on the Right -->
                 <div class="col-md-4">
                     <div style="text-align: center;">
                         <img src="../<?php echo e($movie['poster_url']); ?>" 
@@ -95,7 +91,6 @@ $showtimes = $bookingService->getShowtimes($movie_id);
         </div>
     </div>
 
-    <!-- Seat Selection (only shown when showtime is selected) -->
     <?php if (isset($_GET['showtime_id'])): ?>
         <?php 
         $showtime_id = (int) $_GET['showtime_id'];
@@ -113,7 +108,6 @@ $showtimes = $bookingService->getShowtimes($movie_id);
                             <input type="hidden" name="movie_id" value="<?php echo $movie_id; ?>">
                             <input type="hidden" name="showtime_id" value="<?php echo $showtime_id; ?>">
                             
-                            <!-- Seat Legend -->
                             <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; background: #f8f8f8; padding: 15px; border-radius: 10px;">
                                 <div style="display: flex; align-items: center; gap: 8px;">
                                     <div style="width: 20px; height: 20px; background: #e9ecef; border: 1px solid #ccc; border-radius: 3px;"></div>
