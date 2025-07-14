@@ -1,18 +1,27 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
+
+
 body {
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", sans-serif;
-  background-color: #f8f8f8;
+  background:linear-gradient(135deg, #3c0d0d, #7e2e2e, #2b1a12); 
   color: #303030;
 }
 
+
+
 header {
-  background-color: #303030;
+  background: linear-gradient(135deg, #2b1a12, #5c2b2b, #3c0d0d); 
   height: 100px;
-  color: #fff;
+  color: #f3e5ab; 
   text-align: center;
   display: flex;
   align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid #7e2e2e; 
 }
 
 .nav-container {
@@ -26,22 +35,38 @@ header {
   height: 100%;
 }
 
-
 .container {
   max-width: 1400px;
   margin: 40px auto;
   padding: 20px;
-  background: #fff;
+  background: #f8f1e4; 
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+.booking-status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+.booking-status.confirmed {
+  background: #e0f7e9;
+  color: #2e7d32;
+}
+.booking-status.cancelled {
+  background: #fdecea;
+  color: #d32f2f;
 }
 
-h1{
-  color: #ffffff;
+
+
+
+h1, h2 {
+  color: #3c0d0d; 
 }
 
-h2 {
-  color: #303030;
+h1, .site-name, .movie-title {
+  font-family: 'Cinzel', serif;
 }
 
 .movie-list {
@@ -88,52 +113,40 @@ h2 {
   text-align: center;
 }
 
+
+
 .button {
   display: inline-block;
-  background-color: #303030;
-  color: #fff;
+  background-color: #7e2e2e; 
+  color: #f3e5ab;           
   padding: 10px 20px;
-  border: none;
-  text-decoration: none;
-  border-radius: 5px;
+  border: 2px solid #3c0d0d; 
+  border-radius: 6px;
   margin: 10px auto 20px auto;
   transition: all 0.3s ease;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
+  font-family: 'Cinzel', serif; 
+  letter-spacing: 0.5px;
   text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 .button:hover {
-  opacity: 0.85;
+  background-color: #5c2b2b;
+  color: #fff4c2;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.primary-button {
-  background-color: #1e88e5;
-  color: white;
-  font-weight: bold;
-}
-
-.secondary-button {
-  background-color: #666;
-}
-
-.cancel-button {
-  background-color: #dc3545;
-  color: white;
-  font-weight: bold;
-  padding: 6px 12px;
-  font-size: 0.7em;
-  margin: 5px 0 0 0;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
 }
 
 .button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(48, 48, 48, 0.3);
+  box-shadow: 0 0 0 3px rgba(124, 47, 47, 0.3);
 }
 
-/* Footer Styles */
+
+
+
 .site-footer {
     background-color: #303030;
     color: #ecf0f1;
@@ -240,8 +253,18 @@ h2 {
     }
 }
 
+
 nav {
   margin-top: 15px;
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0.4;
+  }
 }
 
 .site-name {
@@ -251,7 +274,9 @@ nav {
   margin: 0;
   white-space: nowrap;
   line-height: 1;
+  animation: flicker 1.8s infinite;
 }
+
 
 .nav-menu {
   display: flex;
@@ -300,11 +325,13 @@ nav {
   color: #303030;
 }
 
+
 .toggle-active {
   font-weight: bold;
   color: #303030;
   opacity: 1;
 }
+
 
 .toggle-inactive,
 .toggle-inactive:link,
@@ -316,16 +343,19 @@ nav {
   transition: 0.2s;
 }
 
+
 .toggle-inactive:hover {
   color: #505050;
   opacity: 1;
   text-decoration: none;
 }
 
+
 .toggle-divider {
   margin: 0 8px;
   color: #aaa;
 }
+
 
 form {
   max-width: 450px;
@@ -490,7 +520,7 @@ form p {
   width: 100%;
 }
 
-/* Movies page specific styles */
+
 .movies-card {
   background: #ffffff;
   border: 1px solid #ddd;
@@ -537,10 +567,12 @@ form p {
   font-weight: bold;
 }
 
+
 a:hover .movies-card {
   transform: scale(1.05);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
+
 
 .view-movie-poster-card {
   background: #ffffff;
@@ -581,6 +613,7 @@ a:hover .movies-card {
   font-weight: bold;
 }
 
+
 .error-message {
   color: #d32f2f;
   background-color: #ffebee;
@@ -611,7 +644,7 @@ a:hover .movies-card {
   font-size: 0.95em;
 }
 
-/* Profile page styling */
+
 .profile-section {
   background: #f9f9f9;
   padding: 25px;
@@ -673,7 +706,7 @@ a:hover .movies-card {
   line-height: 1.4;
 }
 
-/* Page headers */
+
 .page-header {
   text-align: center;
   margin-bottom: 30px;
@@ -699,7 +732,7 @@ a:hover .movies-card {
   line-height: normal;
 }
 
-/* Showtime cards styling */
+
 .showtimes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -733,7 +766,7 @@ a:hover .movies-card {
   font-size: 0.95em;
 }
 
-/* No showtimes message */
+
 .no-showtimes {
   background: #f8f8f8;
   padding: 20px;
@@ -744,7 +777,7 @@ a:hover .movies-card {
   color: #666;
 }
 
-/* Action buttons styling */
+
 .action-buttons {
   text-align: center;
   margin-top: 30px;
@@ -754,7 +787,7 @@ a:hover .movies-card {
   margin: 0 10px;
 }
 
-/* Movie details styling */
+
 .movie-details {
   margin-bottom: 30px;
 }
@@ -791,22 +824,11 @@ a:hover .movies-card {
   margin-bottom: 20px;
 }
 
-/* New Booking Page Layout */
-.booking-page-layout {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-}
 
-.booking-movie-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 30px;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    border: 1px solid #dee2e6;
+.booking-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
 .movie-poster-small {
@@ -1012,6 +1034,8 @@ a:hover .movies-card {
   margin-top: 20px;
 }
 
+
+
 .view-movie-poster-card {
   border: 1px solid #ddd;
   border-radius: 12px;
@@ -1023,7 +1047,7 @@ a:hover .movies-card {
   height: 350px;
 }
 
-/* Dashboard Styles */
+
 .dashboard-header {
     text-align: center;
     margin-bottom: 2rem;
@@ -1167,7 +1191,7 @@ a:hover .movies-card {
     color: #777;
 }
 
-/* Payment Page Styles */
+
 .payment-methods {
     margin-bottom: 30px;
 }
@@ -1249,7 +1273,7 @@ a:hover .movies-card {
     margin-bottom: 15px;
 }
 
-/* Advanced Search Styles */
+
 .search-filters {
     background-color: #f8f9fa;
     padding: 30px;
@@ -1551,7 +1575,7 @@ a:hover .movies-card {
     border-radius: 5px;
 }
 
-/* About Page Styles */
+
 .about-content {
     padding: 20px 0;
 }
@@ -1629,7 +1653,7 @@ a:hover .movies-card {
     }
 }
 
-/* Contact Page Styles */
+
 .contact-info {
     margin-bottom: 30px;
     background-color: #f8f9fa;
@@ -1710,7 +1734,7 @@ a:hover .movies-card {
     margin-bottom: 15px;
 }
 
-/* Privacy Policy Styles */
+
 .privacy-content {
     padding: 20px 0;
 }
@@ -1746,12 +1770,13 @@ a:hover .movies-card {
     margin-top: -10px;
 }
 
+
 .clear-fix {
     clear: both;
     width: 100%;
 }
 
-/* Account Settings Page Styles */
+
 .profile-sidebar {
     background-color: #f8f9fa;
     padding: 20px;
@@ -1802,7 +1827,7 @@ a:hover .movies-card {
     border-radius: 4px;
 }
 
-/* Header search form styling */
+
 .search-item {
   margin-right: 10px;
   display: flex;
@@ -1862,7 +1887,7 @@ a:hover .movies-card {
   background-color: #707070;
 }
 
-/* Alert messages */
+
 .alert {
   padding: 15px;
   margin-bottom: 20px;
@@ -1882,7 +1907,7 @@ a:hover .movies-card {
   border-color: #c3e6cb;
 }
 
-/* Booking Confirmation Page */
+
 .booking-confirmation {
   max-width: 800px;
   margin: 0 auto;
@@ -1955,7 +1980,7 @@ a:hover .movies-card {
   gap: 15px;
 }
 
-/* Admin Styles */
+
 .admin-wrapper {
   display: flex;
   min-height: 100vh;
@@ -2200,7 +2225,7 @@ textarea.form-control {
   gap: 10px;
 }
 
-/* Admin Icon Cards */
+
 .icon-card-grid {
   display: flex;
   flex-wrap: wrap;
@@ -2268,7 +2293,7 @@ textarea.form-control {
   font-size: 0.9rem;
 }
 
-/* Admin Section Styles */
+
 .admin-section-header {
   margin-bottom: 20px;
   border-bottom: 1px solid #eee;
@@ -2281,7 +2306,7 @@ textarea.form-control {
   color: #303030;
 }
 
-/* Status Cards */
+
 .status-grid {
   display: flex;
   gap: 20px;
@@ -2328,7 +2353,7 @@ textarea.form-control {
   color: #666;
 }
 
-/* Quick Action Buttons */
+
 .quick-actions {
   display: flex;
   flex-wrap: wrap;
@@ -2364,7 +2389,7 @@ textarea.form-control {
   display: block;
 }
 
-/* Admin Grid Layout */
+
 .admin-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2378,7 +2403,7 @@ textarea.form-control {
   }
 }
 
-/* Data Tables */
+
 .table-container {
   overflow-x: auto;
 }
@@ -2422,7 +2447,7 @@ textarea.form-control {
   text-decoration: underline;
 }
 
-/* Movie Action Button */
+
 .movie-action-button {
   display: inline-block;
   padding: 10px 15px;
