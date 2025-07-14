@@ -82,7 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $genreQuery = "SELECT DISTINCT genre FROM movies ORDER BY genre";
 $genreResult = $conn->query($genreQuery);
 
-// Parse user's preferred genres
 $userGenres = [];
 if (!empty($user['preferred_genres'])) {
     $userGenres = explode(',', $user['preferred_genres']);
