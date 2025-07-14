@@ -23,7 +23,7 @@ $recentMovies = $adminService->getRecentMovies(5);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Cinema Booking</title>
+    <title>Admin Dashboard - CineXpress</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -117,13 +117,6 @@ $recentMovies = $adminService->getRecentMovies(5);
                     <h2>Quick Actions</h2>
                 </div>
                 <div class="quick-actions">
-                    <a href="addMovie.php" class="quick-action-btn">
-                        <div class="quick-action-icon">
-                            <i class="fas fa-plus-circle"></i>
-                        </div>
-                        <span>Add Movie</span>
-                    </a>
-                    
                     <a href="manageMovies.php" class="quick-action-btn">
                         <div class="quick-action-icon">
                             <i class="fas fa-edit"></i>
@@ -131,18 +124,25 @@ $recentMovies = $adminService->getRecentMovies(5);
                         <span>Manage Movies</span>
                     </a>
                     
-                    <a href="#" class="quick-action-btn">
+                    <a href="manageShowtimes.php" class="quick-action-btn">
                         <div class="quick-action-icon">
-                            <i class="fas fa-calendar-plus"></i>
+                            <i class="fas fa-calendar-alt"></i>
                         </div>
-                        <span>Add Showtimes</span>
+                        <span>Manage Showtimes</span>
                     </a>
                     
-                    <a href="#" class="quick-action-btn">
+                    <a href="manageUsers.php" class="quick-action-btn">
                         <div class="quick-action-icon">
-                            <i class="fas fa-chart-line"></i>
+                            <i class="fas fa-users"></i>
                         </div>
-                        <span>View Reports</span>
+                        <span>Manage Users</span>
+                    </a>
+                    
+                    <a href="manageBookings.php" class="quick-action-btn">
+                        <div class="quick-action-icon">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <span>Manage Bookings</span>
                     </a>
                 </div>
             </div>
@@ -190,24 +190,33 @@ $recentMovies = $adminService->getRecentMovies(5);
                         <h2>Recently Added Movies</h2>
                     </div>
                     <?php if ($recentMovies && $recentMovies->num_rows > 0): ?>
-                        <div class="recent-movies-grid">
-                            <?php while($movie = $recentMovies->fetch_assoc()): ?>
-                                <div class="recent-movie">
-                                    <div class="recent-movie-poster">
-                                        <img src="../<?php echo e($movie['poster_url']); ?>" alt="<?php echo e($movie['title']); ?>">
-                                    </div>
-                                    <div class="recent-movie-title">
-                                        <?php echo e($movie['title']); ?>
-                                    </div>
-                                    <div class="recent-movie-actions">
-                                        <a href="editMovie.php?id=<?php echo $movie['id']; ?>" class="movie-action-button edit-button">Edit</a>
-                                        <a href="deleteMovie.php?id=<?php echo $movie['id']; ?>" class="movie-action-button delete-button">Delete</a>
-                                    </div>
-                                </div>
-                            <?php endwhile; ?>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Status</th>
+                                        <th>Added</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php while($movie = $recentMovies->fetch_assoc()): ?>
+                                        <tr>
+                                            <td><?php echo e($movie['title']); ?></td>
+                                            <td><?php echo ucfirst(str_replace('_', ' ', $movie['status'])); ?></td>
+                                            <td><?php echo formatDate($movie['created_at']); ?></td>
+                                            <td>
+                                                <a href="editMovie.php?id=<?php echo $movie['id']; ?>" class="movie-action-button edit-button" style="font-size: 0.8em; padding: 4px 8px;">Edit</a>
+                                                <a href="deleteMovie.php?id=<?php echo $movie['id']; ?>" class="movie-action-button delete-button" style="font-size: 0.8em; padding: 4px 8px;">Delete</a>
+                                            </td>
+                                        </tr>
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
                         </div>
                     <?php else: ?>
-                        <p class="no-data">No movies have been added yet.</p>
+                        <div class="info-message">No movies have been added yet.</div>
                     <?php endif; ?>
                 </div>
             </div>

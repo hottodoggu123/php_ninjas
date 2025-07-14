@@ -12,7 +12,7 @@ $movies = $movieService->getAllMovies();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Movies - Cinema Admin</title>
+    <title>Manage Movies - CineXpress Admin</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -32,9 +32,9 @@ $movies = $movieService->getAllMovies();
             </div>
         </div>
         <div class="admin-section">
-            <div class="admin-section-header">
+            <div class="admin-section-header" style="display: flex; justify-content: space-between; align-items: center;">
                 <h2>All Movies</h2>
-                <a href="addMovie.php" class="movie-action-button edit-button" style="float:right;">Add Movie</a>
+                <a href="addMovie.php" class="movie-action-button edit-button">Add Movie</a>
             </div>
             <div class="table-container">
                 <?php if ($movies && $movies->num_rows > 0): ?>
@@ -46,7 +46,7 @@ $movies = $movieService->getAllMovies();
                                 $firstRow = $movies->fetch_assoc();
                                 $movies->data_seek(0);
                                 foreach (array_keys($firstRow) as $field): ?>
-                                    <th><?php echo e($field); ?></th>
+                                    <th><?php echo e(ucfirst(str_replace('_', ' ', $field))); ?></th>
                                 <?php endforeach; ?>
                                 <th>Actions</th>
                             </tr>
@@ -58,8 +58,8 @@ $movies = $movieService->getAllMovies();
                                     <td><?php echo e($cell); ?></td>
                                 <?php endforeach; ?>
                                 <td>
-                                    <a href="editMovie.php?id=<?php echo $row['id']; ?>" class="movie-action-button edit-button">Edit</a>
-                                    <a href="deleteMovie.php?id=<?php echo $row['id']; ?>" class="movie-action-button delete-button" onclick="return confirm('Are you sure you want to delete this movie?');">Delete</a>
+                                    <a href="editMovie.php?id=<?php echo $row['id']; ?>" class="movie-action-button edit-button" style="font-size: 0.8em; padding: 4px 8px;">Edit</a>
+                                    <a href="deleteMovie.php?id=<?php echo $row['id']; ?>" class="movie-action-button delete-button" style="font-size: 0.8em; padding: 4px 8px;">Delete</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>

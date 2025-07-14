@@ -74,5 +74,51 @@ class AdminService {
             return false;
         }
     }
+    
+    /**
+     * Get all showtimes with movie details
+     */
+    public function getAllShowtimes() {
+        try {
+            $result = $this->conn->query("
+                SELECT s.id, s.movie_id, s.show_date, s.show_time, 
+                       s.total_seats, m.title as movie_title,
+                       (SELECT COUNT(*) FROM bookings b WHERE b.showtime_id = s.id
+                        AND b.booking_status = 'confirmed') as booked_seats
+                FROM showtimes s
+                JOIN movies m ON s.movie_id = m.id
+                ORDER BY s.show_date ASC, s.show_time ASC
+            ");
+            return $result;
+        } catch (Exception $e) {
+            error_log("Error fetching all showtimes: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Search showtimes by movie title
+     */
+    public function searchShowtimes($searchTerm) {
+        try {
+            $stmt = $this->conn->prepare("
+                SELECT s.id, s.movie_id, s.show_date, s.show_time, 
+                       s.total_seats, m.title as movie_title,
+                       (SELECT COUNT(*) FROM bookings b WHERE b.showtime_id = s.id
+                        AND b.booking_status = 'confirmed') as booked_seats
+                FROM showtimes s
+                JOIN movies m ON s.movie_id = m.id
+                WHERE m.title LIKE ?
+                ORDER BY s.show_date ASC, s.show_time ASC
+            ");
+            $searchPattern = '%' . $searchTerm . '%';
+            $stmt->bind_param("s", $searchPattern);
+            $stmt->execute();
+            return $stmt->get_result();
+        } catch (Exception $e) {
+            error_log("Error searching showtimes: " . $e->getMessage());
+            return false;
+        }
+    }
 }
 ?>

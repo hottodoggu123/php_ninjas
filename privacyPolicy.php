@@ -6,14 +6,13 @@ include 'includes/header.php';
 <div class="container">
     <div class="page-header">
         <h1>Privacy Policy</h1>
-        <p>Last updated: July 6, 2025</p>
     </div>
     
     <div class="privacy-content">
         <div class="privacy-section">
             <h2>1. Introduction</h2>
-            <p>Welcome to PHP Ninjas Cinema. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
-            <p>This privacy policy aims to give you information on how PHP Ninjas Cinema collects and processes your personal data through your use of this website, including any data you may provide through this website when you sign up for an account, book tickets, or use our services.</p>
+            <p>Welcome to CineXpress. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
+            <p>This privacy policy aims to give you information on how CineXpress collects and processes your personal data through your use of this website, including any data you may provide through this website when you sign up for an account, book tickets, or use our services.</p>
             <p>It is important that you read this privacy policy together with any other privacy notice or fair processing notice we may provide on specific occasions when we are collecting or processing personal data about you so that you are fully aware of how and why we are using your data.</p>
         </div>
 
@@ -79,9 +78,9 @@ include 'includes/header.php';
             <h2>8. Contact Us</h2>
             <p>If you have any questions about this privacy policy or our privacy practices, please contact us:</p>
             <ul>
-                <li>By email: privacy@phpninjas-cinema.com</li>
-                <li>By phone: +63 2 1234 5678</li>
-                <li>By mail: PHP Ninjas Cinema, 123 Web Dev Street, Coding City, Philippines</li>
+                <li>By email: privacy@cinexpress.com</li>
+                <li>By phone: (555) 123-4567</li>
+                <li>By mail: 123 Cinema Boulevard, Manila, Philippines 1000</li>
             </ul>
         </div>
     </div>

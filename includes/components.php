@@ -1,6 +1,16 @@
 <?php
 /**
- * Movie listing component - reusable across index.php and movies.php
+ * Movie listing component - reusable across index.php and    echo '</p>';
+    
+    if ($showCancelButton && $booking['booking_status'] !== 'cancelled' && !$isPastBooking) {
+        echo '<form method="POST" action="cancelBooking.php" onsubmit="return confirm(\'Are you sure you want to cancel this booking?\');" style="margin-top: 10px;">';
+        echo '<input type="hidden" name="booking_id" value="' . $booking['id'] . '">';
+        echo '<button type="submit" class="button cancel-button" style="background: #d32f2f; color: white; border: none; padding: 8px 16px; border-radius: 4px; font-size: 0.9em; cursor: pointer; transition: all 0.3s ease;">Cancel Booking</button>';
+        echo '</form>';
+    }
+    
+    echo '</div>';
+    echo '</div';hp
  */
 function renderMovieList($movies, $basePath = '') {
     if (!$movies || $movies->num_rows === 0) {
@@ -46,13 +56,17 @@ function renderMovieStatusToggle($currentView, $basePath = '') {
 /**
  * Dashboard booking card component
  */
-function renderBookingCard($booking, $showCancelButton = false, $isPastBooking = false) {
+function renderBookingCard($booking, $showCancelButton = false, $isPastBooking = false, $showPoster = true) {
     $cardClass = 'booking-card' . ($isPastBooking ? ' past-booking' : '');
     
     echo '<div class="' . $cardClass . '">';
-    echo '<div class="booking-poster">';
-    echo '<img src="' . e($booking['poster_url']) . '" alt="' . e($booking['title']) . '">';
-    echo '</div>';
+    
+    if ($showPoster && isset($booking['poster_url'])) {
+        echo '<div class="booking-poster">';
+        echo '<img src="' . e($booking['poster_url']) . '" alt="' . e($booking['title']) . '">';
+        echo '</div>';
+    }
+    
     echo '<div class="booking-details">';
     echo '<h3>' . e($booking['title']) . '</h3>';
     echo '<p>';
@@ -86,15 +100,14 @@ function renderAdminSidebar($activePage = '') {
     $menuItems = [
         'dashboard.php' => ['Dashboard', 'fas fa-tachometer-alt'],
         'manageMovies.php' => ['Movies', 'fas fa-film'],
-        '#users' => ['Users', 'fas fa-users'],
-        '#bookings' => ['Bookings', 'fas fa-ticket-alt'],
-        '#showtimes' => ['Showtimes', 'fas fa-calendar-alt'],
-        '#reports' => ['Reports', 'fas fa-chart-bar'],
+        'manageUsers.php' => ['Users', 'fas fa-users'],
+        'manageBookings.php' => ['Bookings', 'fas fa-ticket-alt'],
+        'manageShowtimes.php' => ['Showtimes', 'fas fa-calendar-alt'],
         '../logout.php' => ['Logout', 'fas fa-sign-out-alt']
     ];
     
     echo '<aside class="admin-sidebar">';
-    echo '<div class="admin-logo"><h2>Cinema Admin</h2></div>';
+    echo '<div class="admin-logo"><h2>CineXpress Admin</h2></div>';
     echo '<ul class="sidebar-menu">';
     
     foreach ($menuItems as $link => $item) {

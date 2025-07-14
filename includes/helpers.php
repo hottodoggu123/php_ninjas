@@ -1,6 +1,6 @@
 <?php
 /**
- * Helper functions for the cinema booking system
+ * Helper functions for the CineXpress booking system
  */
 
 /**

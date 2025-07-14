@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Movie - Cinema Booking Admin</title>
+    <title>Delete Movie - CineXpress Admin</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -58,6 +58,11 @@ if (isset($_GET['id'])) {
             </div>
             
             <div class="admin-section">
+                <div class="admin-section-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>Delete Movie</h2>
+                    <a href="manageMovies.php" class="movie-action-button edit-button" style="font-size: 0.8em; padding: 4px 8px;">Back to Movies</a>
+                </div>
+                
                 <?php if ($success): ?>
                     <div class="success-message">
                         <?php echo $message; ?>
@@ -74,21 +79,32 @@ if (isset($_GET['id'])) {
                         </div>
                     </div>
                 <?php elseif (isset($movie)): ?>
-                    <div class="delete-confirmation">
-                        <h2>Are you sure you want to delete this movie?</h2>
+                    <div class="delete-confirmation" style="text-align: center; max-width: 600px; margin: 0 auto;">
+                        <h3>Are you sure you want to delete this movie?</h3>
                         
-                        <div class="delete-movie-details">
-                            <div class="delete-movie-poster">
-                                <img src="../<?php echo e($movie['poster_url']); ?>" alt="<?php echo e($movie['title']); ?>">
+                        <div class="delete-movie-details" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+                            <div class="delete-movie-poster" style="width: 200px; height: 300px; overflow: hidden; border-radius: 8px;">
+                                <img src="../<?php echo e($movie['poster_url']); ?>" alt="<?php echo e($movie['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
-                            <div class="delete-movie-info">
+                            
+                            <div class="delete-movie-info" style="text-align: center;">
                                 <h3><?php echo e($movie['title']); ?></h3>
-                                <p>This action cannot be undone. Deleting this movie will also remove all associated showtimes and bookings.</p>
+                                
+                                <div class="movie-details" style="text-align: left; margin: 20px 0; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+                                    <p><strong>Genre:</strong> <?php echo e($movie['genre']); ?></p>
+                                    <p><strong>Duration:</strong> <?php echo e($movie['duration']); ?> minutes</p>
+                                    <p><strong>Rating:</strong> <?php echo e($movie['rating']); ?></p>
+                                    <p><strong>Release Date:</strong> <?php echo formatDate($movie['release_date']); ?></p>
+                                    <p><strong>Status:</strong> <?php echo ucfirst(str_replace('_', ' ', $movie['status'])); ?></p>
+                                    <p><strong>Price:</strong> <?php echo formatCurrency($movie['price']); ?></p>
+                                </div>
+                                
+                                <p style="color: #d32f2f; font-weight: bold; margin: 20px 0;">⚠️ This action cannot be undone. Deleting this movie will also remove all associated showtimes and bookings.</p>
                                 
                                 <form method="POST">
                                     <input type="hidden" name="confirm" value="yes">
                                     <div class="button-container">
-                                        <button type="submit" class="button danger-button">Yes, Delete Movie</button>
+                                        <button type="submit" class="button" style="background-color: #d32f2f; color: white;">Yes, Delete Movie</button>
                                         <a href="manageMovies.php" class="button secondary-button">Cancel</a>
                                     </div>
                                 </form>

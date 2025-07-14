@@ -21,8 +21,8 @@ if ($isLoggedIn) {
     // Get user information
     $user = $userService->getUserById($userId);
     
-    // Get upcoming bookings
-    $upcomingBookings = $userService->getUpcomingBookings($userId, 5);
+    // Get upcoming bookings (increased limit to show more bookings)
+    $upcomingBookings = $userService->getUpcomingBookings($userId, 4);
     
     // Get statistics
     $stats = $userService->getUserStats($userId);
@@ -56,7 +56,7 @@ if ($isLoggedIn) {
         <div class="bookings-container">
             <?php if ($upcomingBookings && $upcomingBookings->num_rows > 0): ?>
                 <?php while ($booking = $upcomingBookings->fetch_assoc()): ?>
-                    <?php renderBookingCard($booking, true); ?>
+                    <?php renderBookingCard($booking, false); ?>
                 <?php endwhile; ?>
             <?php else: ?>
                 <div class="no-bookings">
