@@ -74,7 +74,7 @@ INSERT INTO movies (title, description, genre, duration, rating, release_date, p
 ('How to Train Your Dragon', 'The beloved animated series returns with new adventures in the hidden world', 'Animation', 104, 'PG', '2025-06-13', 'assets/images/httyd_new.jpg', 'now_showing', 480.00),
 ('M3GAN 2.0', 'The killer doll returns with upgraded features and deadlier intentions', 'Horror', 102, 'PG-13', '2025-06-27', 'assets/images/megan2.jpg', 'now_showing', 520.00),
 ('Jurassic World: Rebirth', 'Dinosaurs once again threaten humanity in this explosive new chapter', 'Adventure', 147, 'PG-13', '2025-07-02', 'assets/images/jurassic_rebirth.jpg', 'now_showing', 550.00),
-('Elio', 'A young boy accidentally becomes Earth\'s intergalactic ambassador', 'Animation', 101, 'PG', '2025-06-13', 'assets/images/elio.jpg', 'now_showing', 460.00),
+('Elio', 'A young boy accidentally becomes Earth\'s intergalactic ambassador', 'Animation', 101, 'PG', '2025-06-13', 'assets/images/elio.jpeg', 'now_showing', 460.00),
 ('F1: The Movie', 'Experience the high-octane world of Formula 1 racing like never before', 'Action', 135, 'PG-13', '2025-06-25', 'assets/images/f1_movie.jpg', 'now_showing', 530.00),
 ('Superman', 'The Man of Steel returns to protect Earth from a new cosmic threat', 'Action', 142, 'PG-13', '2025-07-11', 'assets/images/superman2025.jpg', 'now_showing', 580.00),
 ('Sinners', 'A supernatural thriller about redemption and ancient curses', 'Horror', 118, 'R', '2025-07-03', 'assets/images/sinners.jpg', 'now_showing', 500.00),
