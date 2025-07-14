@@ -253,11 +253,7 @@ h1, .site-name, .movie-title {
     }
 }
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> origin/main
 nav {
   margin-top: 15px;
 }
@@ -329,20 +325,14 @@ nav {
   color: #303030;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
 .toggle-active {
   font-weight: bold;
   color: #303030;
   opacity: 1;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
 .toggle-inactive,
 .toggle-inactive:link,
 .toggle-inactive:visited,
@@ -353,29 +343,20 @@ nav {
   transition: 0.2s;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
 .toggle-inactive:hover {
   color: #505050;
   opacity: 1;
   text-decoration: none;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
 .toggle-divider {
   margin: 0 8px;
   color: #aaa;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
 form {
   max-width: 450px;
   margin: 0 auto;
@@ -586,19 +567,13 @@ form p {
   font-weight: bold;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
 a:hover .movies-card {
   transform: scale(1.05);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
 .view-movie-poster-card {
   background: #ffffff;
   border: 1px solid #ddd;
@@ -638,10 +613,7 @@ a:hover .movies-card {
   font-weight: bold;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
 .error-message {
   color: #d32f2f;
   background-color: #ffebee;
@@ -852,30 +824,11 @@ a:hover .movies-card {
   margin-bottom: 20px;
 }
 
-<<<<<<< HEAD
 
 .booking-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-=======
-/* New Booking Page Layout */
-.booking-page-layout {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
->>>>>>> origin/main
-}
-
-.booking-movie-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 30px;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    border: 1px solid #dee2e6;
 }
 
 .movie-poster-small {
@@ -1081,11 +1034,8 @@ a:hover .movies-card {
   margin-top: 20px;
 }
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> origin/main
 .view-movie-poster-card {
   border: 1px solid #ddd;
   border-radius: 12px;
@@ -1820,10 +1770,7 @@ a:hover .movies-card {
     margin-top: -10px;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
 .clear-fix {
     clear: both;
     width: 100%;
